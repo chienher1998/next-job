@@ -54,7 +54,13 @@
             <a href="/users/login" class="btn">Login</a>
         </div>
     </nav>
-    
+  <nav class="navbar flex justify-between items-center">
+    <a href="/" class="btn btn-ghost normal-case text-xl">Next-Job</a>
+    <div>
+        <a href="/users/new" class="btn mx-10 ">Sign Up</a>
+        <a href="/users/login" class="btn">Login</a>
+    </div>
+</nav>
   <h1 class="text-center text-xl">Create an Account to Post a Job</h1>
   <div class="text-center">
       <a class="link-hover italic text-xs" href="/login">Already have an account? Click here to login instead.</a>
@@ -114,7 +120,10 @@
           </div>
       </form>
   </div>
+
   </div>
+
+
 
 <!-- <script>
    import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
