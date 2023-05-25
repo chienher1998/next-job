@@ -9,7 +9,6 @@
     <div>
         <a href="/users/new" class="btn mx-10 ">Sign Up</a>
         <a href="/users/login" class="btn">Login</a>
-        <a href="/users/login" class="btn">Login</a>
     </div>
 </nav>
 <h1 class="text-center text-xl font-bold">Find Your Next Job</h1>
