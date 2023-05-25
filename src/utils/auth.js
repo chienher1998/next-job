@@ -1,5 +1,7 @@
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+import { writable } from 'svelte/store';
 
+export const isLoggedInStore = writable(false);
 
 const emptyAuth = {
     "token": "",
@@ -29,6 +31,7 @@ const emptyAuth = {
 
   export async function isLoggedIn() {
     if (!getTokenFromLocalStorage()) {
+      isLoggedInStore.set(false); // update store value
       return false
     }
   
@@ -52,12 +55,14 @@ const emptyAuth = {
           "token": res.token,
           "userId": res.record.id
         }));
-  
+        
+        isLoggedInStore.set(true);
         return true
       }
-  
+      isLoggedInStore.set(false);
       return false
     } catch {
+      isLoggedInStore.set(false); 
       return false
     }
   }
