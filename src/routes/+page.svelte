@@ -2,14 +2,17 @@
   export let data;
   import humanize from 'humanize-plus';
 </script>
-<div class="m-10">
-<nav class="flex justify-center items-center">
-<h1 class="text-center text-xl font-bold">Find Your Next Job</h1>
-<div class="right-0 absolute">
-    <a href="/users/new" class="btn">SignUp</a>
-    <a href="/users/login" class="btn m-10">Login</a>
-</div>
+
+<div class="mx-10 my-3">
+<nav class="flex justify-between items-center">
+    <h1 class="left-0 text-center text-xl font-bold">Next-Job</h1>
+    <div>
+        <a href="/users/new" class="btn mx-10 ">Sign Up</a>
+        <a href="/users/login" class="btn">Login</a>
+    </div>
 </nav>
+<h1 class="text-center text-xl font-bold">Find Your Next Job</h1>
+
 <div class="overflow-x-auto w-full ">
   {#each data.jobs as job}
       <div class="flex flex-col mt-10">
