@@ -4,7 +4,7 @@
 </script>
 
 <div class="mx-10 my-3">
-<nav class="navbar flex justify-between items-center">
+<nav class="flex justify-between items-center">
     <a href="/" class="btn btn-ghost normal-case text-xl">Next-Job</a>
     <div>
         <a href="/users/new" class="btn mx-10 ">Sign Up</a>
