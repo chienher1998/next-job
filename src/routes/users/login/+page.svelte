@@ -1,33 +1,68 @@
 <script>
-    
+	import { authenticateUser } from '../../../utils/auth.js';
+	import { goto } from '$app/navigation';
+	let formErrors = {};
+
+	function postLogIn() {
+		goto('/')
+	}
+	async function logInUser(evt) {
+		evt.preventDefault();
+
+		const userData = {
+			username: evt.target['username'].value,
+			password: evt.target['password'].value
+		};
+		const res = await authenticateUser(userData.username, userData.password);
+
+		if (res.success) {
+			postLogIn();
+		} else {
+			formErrors = {
+				password: {
+					message: 'Login failed. Please check your username and password.'
+				}
+			};
+		}
+	}
 </script>
+
 <div class="mx-10 my-3">
-<nav class="navbar flex justify-between items-center">
-    <a href="/" class="btn btn-ghost normal-case text-xl">Next-Job</a>
-    <div>
-        <a href="/users/new" class="btn mx-10 ">Sign Up</a>
-        <a href="/users/login" class="btn">Login</a>
-    </div>
-</nav>
-<h1 class="text-center text-xl">Login your account</h1>
+	<h1 class="text-center text-xl">Login your account</h1>
 	<div class="flex justify-center items-center mt-8">
-		<form class="w-1/3">
+		<form on:submit={logInUser} class="w-1/3">
 			<div class="form-control w-full">
 				<label class="label" for="username">
 					<span class="label-text">Username</span>
 				</label>
-				<input type="text" name="username" placeholder="Enter your username" class="input input-bordered w-full" />
+				<input
+					type="text"
+					name="username"
+					placeholder="Enter your username"
+					class="input input-bordered w-full"
+				/>
 			</div>
-            <div class="form-control w-full">
-				<label class="label" for="username">
+			<div class="form-control w-full">
+				<label class="label" for="password">
 					<span class="label-text">Password</span>
 				</label>
-				<input type="password" name="username" placeholder="Enter your password" class="input input-bordered w-full" />
+				<input
+					type="password"
+					name="password"
+					placeholder=""
+					class="input input-bordered w-full"
+					required
+				/>
+				{#if 'password' in formErrors}
+				<label class="label" for="password">
+				  <span class="label-text-alt text-red-500">{formErrors.password.message}</span>
+				</label>
+				{/if}
 			</div>
 
-            <div class="form-control w-full mt-4">
-                <button class="btn btn-md">Log In</button>
-            </div>
+			<div class="form-control w-full mt-4">
+				<button class="btn btn-md">Log In</button>
+			</div>
 		</form>
 	</div>
 </div>
