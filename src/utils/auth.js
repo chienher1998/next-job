@@ -53,6 +53,9 @@ export async function isLoggedIn() {
 					userId: res.record.id
 				})
 			);
+
+      isLoggedInStore.set(true);
+
 		} else {
 			return false;
 		}

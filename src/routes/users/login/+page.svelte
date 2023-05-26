@@ -49,7 +49,7 @@
 				<input
 					type="password"
 					name="password"
-					placeholder=""
+					placeholder="Enter your password"
 					class="input input-bordered w-full"
 					required
 				/>
