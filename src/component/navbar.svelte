@@ -4,7 +4,7 @@
     
     
     <nav class="flex justify-between items-center m-5">
-        <a href="/" class="btn btn-ghost normal-case text-xl">Next-Job</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl">NEXT-JOBS</a>
         <div>
             {#if $isLoggedInStore}
             <a on:click = {logOut} href="/" class="btn mx-10">Log Out</a>
