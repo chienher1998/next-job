@@ -16,7 +16,7 @@ export function logOut() {
 export function getUserId() {
 	const auth = localStorage.getItem('auth');
 	if (auth) {
-		return JSON.stringify(auth)['userId'];
+		return JSON.parse(auth)['userId']; // change stringify to parse
 	}
 	return null;
 }
