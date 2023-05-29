@@ -21,9 +21,9 @@
     // };
 
 
-	function postEdit(){
-		goto('../jobs/edit/')
-	}
+	// function postEdit(){
+	// 	goto(`../{data.job.id}/edit`)
+	// }
 	
 </script>
 
@@ -38,7 +38,7 @@
 				<h1 class="text-3xl font-extrabold">{data.job.title}</h1>
                 {#if getUserId() === data.job.user}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<i class="fa-regular fa-pen-to-square fa-lg ml-5 mt-1 hover:text-black cursor-pointer" on:click={postEdit} />
+				<i class="fa-regular fa-pen-to-square fa-lg ml-5 mt-1 hover:text-black cursor-pointer" href="../{data.job.id}/edit" />
 				{:else}
 				<i class="" />
                 {/if}
