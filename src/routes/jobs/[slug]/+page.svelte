@@ -1,22 +1,27 @@
 <script>
 	import SvelteMarkdown from 'svelte-markdown';
 	import humanize from 'humanize-plus';
-	import { idIsMatched } from '../../../utils/auth.js';
-	// import { goto } from '$app/navigation';
+	import { getUserId } from '../../../utils/auth.js';
+	import { goto } from '$app/navigation';
 	export let data;
+
+	function postEdit(){
+		goto('../jobs/new/')
+	}
+	
 </script>
 
 <head>
 	<link href="./../node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 </head>
 
-<div class="m-10">
+<div class="m-10">	
 	<div class="flex">
 		<div class="flex-1">
 			<div class="flex items-center">
 				<h1 class="text-3xl font-extrabold">{data.job.title}</h1>
-                {#if $idIsMatched}
-				<i class="fa-regular fa-pen-to-square fa-lg ml-5 mt-1 hover:text-black cursor-pointer" />
+                {#if getUserId() === data.job.user}
+				<i class="fa-regular fa-pen-to-square fa-lg ml-5 mt-1 hover:text-black cursor-pointer" on:click={postEdit} />
 				{:else}
 				<i class="" />
                 {/if}
