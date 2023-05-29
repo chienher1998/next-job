@@ -101,3 +101,26 @@ export async function authenticateUser(username, password) {
 		res: res
 	};
 }
+
+
+export const idIsMatched = writable(false);
+
+export async function authJobId({ params }) {
+  const storedUserId = localStorage.getItem('auth');
+	const authObject = JSON.parse(storedUserId);
+  	const userId = authObject.userId;
+
+	const url = new URL(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${params.slug}`)
+	const slug = url.pathname.split("/").pop();
+
+  if (userId === slug) {
+    idIsMatched.set(true);
+    return {
+      success: true
+    };
+  }
+
+  return {
+    success: false
+  };
+}

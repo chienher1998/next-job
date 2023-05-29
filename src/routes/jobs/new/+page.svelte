@@ -176,7 +176,7 @@
 				{/if}
 
 				<div class="form-control w-full mt-8 mb-28">
-					<button class="btn btn-md">Create an Account</button>
+					<button class="btn btn-md">Post Job</button>
 				</div>
 			</div>
 		</form>
