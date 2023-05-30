@@ -7,10 +7,6 @@ export const showWarning = writable(false);
 export function showAlert() {
     showWarning.set(true);
     warningMsg.set("Please sign up first!");
-
-    return setTimeout(() => {
-        showWarning.set(false);
-    }, 3000);
 };
 
 export function showLoginAlert() {

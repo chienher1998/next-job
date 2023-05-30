@@ -5,7 +5,7 @@
 	
 </script>
 
-<header class="m-5">
+<header class="mx-10 mt-5">
 	<nav class="flex justify-between items-center">
 		<a href="/" class="btn btn-ghost normal-case text-xl" on:mousedown={() => showWarning.set(false)}
 			>NEXT-JOBS</a
@@ -20,7 +20,7 @@
 			{/if}
 		</div> 
 	</nav> 
-	{#if showWarning}
+	{#if $showWarning}
 		<div class="alert alert-warning shadow-lg mt-5">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@
 					d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 				/></svg
 			>
-			<span class="absolute ml-8">{warningMsg}</span>
+			<span class="absolute ml-8">{$warningMsg}</span>
 		</div>
 	{/if}
 </header>

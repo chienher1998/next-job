@@ -3,7 +3,7 @@
   import humanize from 'humanize-plus';
 </script>
 
-<div class="mx-10 my-3">
+<div class="mx-10">
 <h1 class="text-center text-xl font-bold">Find Your Next Job</h1>
 <div class="overflow-x-auto w-full ">
   {#each data.jobs as job}
