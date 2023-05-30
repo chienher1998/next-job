@@ -1,29 +1,48 @@
 <script>
-	// import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
+	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	let formErrors = {};
-	// import { goto } from '$app/navigation';
-    // import { getUserId } from '../../../utils/auth.js';
+	import { goto } from '$app/navigation';
+    import { getUserId , getTokenFromLocalStorage} from './../../../../utils/auth.js';
     export let data;
 
-	// async function editJob(evt) {
+	function goSeeJob(){
+		goto(`/jobs/${data.job.id}`)
+	}
 
-    // // const jobdata ={
-            // user: userId, 
-			// title: evt.target['title'].value,
-			// minAnnualCompensation: evt.target['minAnnualCompensation'].value,
-			// maxAnnualCompensation: evt.target['maxAnnualCompensation'].value,
-			// description: evt.target['description'].value,
-			// requirements: evt.target['requirement'].value,
-			// applicationInstructions: evt.target['appinstruction'].value,
-			// location: evt.target['location'].value,
-			// employer: evt.target['employer'].value
-    // // }
-    // }
+	async function editJob(evt) {
+		evt.preventDefault()
+		const userId = getUserId();
+		const jobData ={
+				user: userId, 
+				title: evt.target['title'].value,
+				minAnnualCompensation: evt.target['minAnnualCompensation'].value,
+				maxAnnualCompensation: evt.target['maxAnnualCompensation'].value,
+				description: evt.target['description'].value,
+				requirements: evt.target['requirement'].value,
+				applicationInstructions: evt.target['appinstruction'].value,
+				location: evt.target['location'].value,
+				employer: evt.target['employer'].value
+		}
+	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`, {
+			method: 'PATCH',
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
+			},
+			body: JSON.stringify(jobData)
+		});
+		if (resp.status == 200) {
+			goSeeJob();
+		} else {
+			alert('Failed to edit job');
+		}
+}
 </script>
 
 <div class="mx-10 my-3">
 	<div class="flex justify-center items-center mt-8">
-		<form class="w-3/4">
+		<form on:submit={editJob} class="w-3/4">
 			<div class="form-control w-full">
 				<label class="label" for="title">
 					<span class="label-text">Job Title</span>
@@ -49,6 +68,7 @@
 					name="minAnnualCompensation"
 					placeholder="$ 40000"
 					class="input input-bordered w-full"
+					bind:value = {data.job.minAnnualCompensation}
 					required
 				/>
 				{#if 'minAnnualCompensation' in formErrors}
@@ -67,6 +87,7 @@
 					name="maxAnnualCompensation"
 					placeholder="$ 250000"
 					class="input input-bordered w-full"
+					bind:value = {data.job.maxAnnualCompensation}
 					required
 				/>
 				{#if 'maxAnnualCompensation' in formErrors}
@@ -85,6 +106,7 @@
 					name="employer"
 					placeholder="eg: Ligma"
 					class="input input-bordered w-full"
+					bind:value = {data.job.employer}
 					required
 				/>
 				{#if 'employer' in formErrors}
@@ -101,6 +123,7 @@
 					name="location"
 					placeholder="eg: Serdang"
 					class="input input-bordered w-full"
+					bind:value = {data.job.location}
 					required
 				/>
 				{#if 'location' in formErrors}
@@ -117,6 +140,7 @@
 					name="description"
 					placeholder=""
 					class="textarea textarea-bordered w-full"
+					bind:value = {data.job.description}
 					required
 				/>
 				{#if 'description' in formErrors}
@@ -133,6 +157,7 @@
 					name="requirement"
 					placeholder=""
 					class="textarea textarea-bordered w-full"
+					bind:value = {data.job.requirements}
 					required
 				/>
 				{#if 'requirement' in formErrors}
@@ -149,6 +174,7 @@
 					name="appinstruction"
 					placeholder=""
 					class="textarea textarea-bordered w-full h-32"
+					bind:value = {data.job.applicationInstructions}
 					required
 				/>
 				{#if 'appinstruction' in formErrors}
@@ -158,7 +184,7 @@
 				{/if}
 
 				<div class="form-control w-full mt-8 mb-28">
-					<button class="btn btn-md">Post Job</button>
+					<button class="btn btn-md">Update</button>
 				</div>
 			</div>
 		</form>

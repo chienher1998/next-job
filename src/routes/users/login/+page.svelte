@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 	let formErrors = {};
 
+	let showWarning = false;
+
 	function postLogIn() {
 		goto('/')
 	}
@@ -18,11 +20,7 @@
 		if (res.success) {
 			postLogIn();
 		} else {
-			formErrors = {
-				password: {
-					message: 'Login failed. Please check your username and password.'
-				}
-			};
+			showWarning = true;
 		}
 	}
 </script>

@@ -4,26 +4,10 @@
 	import { getUserId } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
 	export let data;
-	// import { writable } from 'svelte/store';
 
-	// export const username = writable('');
-
-	// const jobData = {
-    //   user: userId,
-    //   title: evt.target['title'].value,
-    //   minAnnualCompensation: evt.target['minAnnualCompensation'].value,
-    //   maxAnnualCompensation: evt.target['maxAnnualCompensation'].value,
-    //   description: evt.target['description'].value,
-    //   requirements: evt.target['requirement'].value,
-    //   applicationInstructions: evt.target['appinstruction'].value,
-    //   location: evt.target['location'].value,
-    //   employer: evt.target['employer'].value
-    // };
-
-
-	// function postEdit(){
-	// 	goto(`../{data.job.id}/edit`)
-	// }
+	function postEdit(){
+		goto(`/jobs/${data.job.id}/edit`)
+	}
 	
 </script>
 
@@ -35,12 +19,12 @@
 	<div class="flex">
 		<div class="flex-1">
 			<div class="flex items-center">
-				<h1 class="text-3xl font-extrabold">{data.job.title}</h1>
+				<h1 class="text-3xl font-extrabold" for="title">{data.job.title}</h1>
                 {#if getUserId() === data.job.user}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<i class="fa-regular fa-pen-to-square fa-lg ml-5 mt-1 hover:text-black cursor-pointer" href="../{data.job.id}/edit" />
+				<i class="fa-regular fa-pen-to-square fa-lg ml-5 mt-1 hover:text-black cursor-pointer" on:click={postEdit}/>
 				{:else}
-				<i class="" />
+				<i class=""/>
                 {/if}
 			</div>
 			<p class="text-xl" for="employer">{data.job.employer}</p>
