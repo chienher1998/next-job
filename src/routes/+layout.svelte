@@ -7,7 +7,7 @@
 
 <header class="mx-10 mt-5">
 	<nav class="flex justify-between items-center">
-		<a href="/" class="btn btn-ghost normal-case text-xl" on:mousedown={() => showWarning.set(false)}
+		<a href="/" class="btn btn-ghost normal-case text-xl" on:click={() => showWarning.set(false)}
 			>NEXT-JOBS</a
 		>
 		<div>
@@ -16,12 +16,12 @@
 				<a on:click={logOut} href="/" class="btn">Log Out</a>
 			{:else}
 				<a href="/users/new/" class="btn mx-10" on:mousedown={showAlert}>Post Job</a>
-				<a href="/users/login/" class="btn" on:mousedown={() => showWarning.set(false)} >Login</a>
+				<a href="/users/login/" class="btn" on:click={() => showWarning.set(false)} >Login</a>
 			{/if}
 		</div> 
 	</nav> 
 	{#if $showWarning}
-		<div class="alert alert-warning shadow-lg mt-5">
+		<div class="container alert alert-warning shadow-lg mt-5 mx-auto">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
