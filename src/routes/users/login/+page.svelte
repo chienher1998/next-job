@@ -1,9 +1,10 @@
 <script>
 	import { authenticateUser } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
+	import { showLoginAlert } from '../../../utils/alert.js'
 	let formErrors = {};
 
-	let showWarning = false;
+	
 
 	function postLogIn() {
 		goto('/')
@@ -20,7 +21,7 @@
 		if (res.success) {
 			postLogIn();
 		} else {
-			showWarning = true;
+			showLoginAlert();
 		}
 	}
 </script>
