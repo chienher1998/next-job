@@ -11,5 +11,5 @@ export function showAlert() {
 
 export function showLoginAlert() {
     showWarning.set(true);
-    warningMsg.set("Please check username / password!");
+    warningMsg.set("Please check username / password !");
 };
