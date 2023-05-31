@@ -2,6 +2,8 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { authenticateUser } from './../../../utils/auth.js';
+	import { showWarning } from '../../../utils/alert.js';
+	showWarning
 	let formErrors = {};
 
 	function postSignUp() {
@@ -50,7 +52,7 @@
 <div class="mx-10 my-3">
 	<h1 class="text-center text-xl">Create an Account to Post a Job</h1>
 	<div class="text-center">
-		<a class="link-hover italic text-xs" href="/login"
+		<a class="link-hover italic text-xs" href="../../users/login" on:click={() => showWarning.set(false)}
 			>Already have an account? Click here to login instead.</a
 		>
 	</div>
