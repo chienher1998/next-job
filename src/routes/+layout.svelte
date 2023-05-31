@@ -1,25 +1,24 @@
 <script>
 	import '../app.css';
 	import { isLoggedInStore, logOut } from '../utils/auth.js';
-	import {warningMsg, showWarning, showAlert } from '../utils/alert.js'
-	
+	import { warningMsg, showWarning, showAlert } from '../utils/alert.js';
 </script>
 
 <header class="mx-10 mt-5">
-	<nav class="flex justify-between items-center">
+	<nav class="navbar flex justify-between items-center">
 		<a href="/" class="btn btn-ghost normal-case text-xl" on:click={() => showWarning.set(false)}
 			>NEXT-JOBS</a
 		>
 		<div>
 			{#if $isLoggedInStore}
-				<a href="/jobs/new/" class="btn mx-10" >Post Job</a>
-				<a on:click={logOut} href="/" class="btn">Log Out</a>
+				<a href="/jobs/new/" class="btn btn-primary mx-10">Post Job</a>
+				<a on:click={logOut} href="/" class="btn btn-primary">Log Out</a>
 			{:else}
 				<a href="/users/new/" class="btn mx-10" on:mousedown={showAlert}>Post Job</a>
-				<a href="/users/login/" class="btn" on:click={() => showWarning.set(false)} >Login</a>
+				<a href="/users/login/" class="btn" on:click={() => showWarning.set(false)}>Login</a>
 			{/if}
-		</div> 
-	</nav> 
+		</div>
+	</nav>
 	{#if $showWarning}
 		<div class="container alert alert-warning shadow-lg mt-5 mx-auto">
 			<svg

@@ -1,43 +1,64 @@
 <script>
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
-	let formErrors = {};
 	import { goto } from '$app/navigation';
-    import { getUserId , getTokenFromLocalStorage} from './../../../../utils/auth.js';
-    export let data;
+	import { getUserId, getTokenFromLocalStorage } from './../../../../utils/auth.js';
+	let formErrors = {};
+	export let data;
 
-	function goSeeJob(){
-		goto(`/jobs/${data.job.id}`)
+	function goSeeJob() {
+		goto(`/jobs/${data.job.id}`);
 	}
 
 	async function editJob(evt) {
-		evt.preventDefault()
-		const userId = getUserId();
-		const jobData ={
-				user: userId, 
-				title: evt.target['title'].value,
-				minAnnualCompensation: evt.target['minAnnualCompensation'].value,
-				maxAnnualCompensation: evt.target['maxAnnualCompensation'].value,
-				description: evt.target['description'].value,
-				requirements: evt.target['requirement'].value,
-				applicationInstructions: evt.target['appinstruction'].value,
-				location: evt.target['location'].value,
-				employer: evt.target['employer'].value
+		evt.preventDefault();
+		formErrors = {}; // reset the formErrors
+		if (evt.target['minAnnualCompensation'].value < 1000) {
+			formErrors['minAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
+			return;
 		}
-	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`, {
-			method: 'PATCH',
-			mode: 'cors',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
-			},
-			body: JSON.stringify(jobData)
-		});
+		if (evt.target['maxAnnualCompensation'].value) {
+			formErrors['maxAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
+			return;
+		}
+		if (evt.target['appinstruction'].value.length < 10) {
+			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
+			return;
+		}
+
+		if (Object.keys(formErrors).length > 0) {
+			// If there are form errors, stop the execution
+			return;
+		}
+		const userId = getUserId();
+		const jobData = {
+			user: userId,
+			title: evt.target['title'].value,
+			minAnnualCompensation: evt.target['minAnnualCompensation'].value,
+			maxAnnualCompensation: evt.target['maxAnnualCompensation'].value,
+			description: evt.target['description'].value,
+			requirements: evt.target['requirement'].value,
+			applicationInstructions: evt.target['appinstruction'].value,
+			location: evt.target['location'].value,
+			employer: evt.target['employer'].value
+		};
+		const resp = await fetch(
+			PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`,
+			{
+				method: 'PATCH',
+				mode: 'cors',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
+				},
+				body: JSON.stringify(jobData)
+			}
+		);
 		if (resp.status == 200) {
 			goSeeJob();
 		} else {
-			alert('Failed to edit job');
+			throw 'Failed to edit job';
 		}
-}
+	}
 </script>
 
 <div class="mx-10 my-3">
@@ -51,7 +72,7 @@
 					type="text"
 					name="title"
 					class="input input-bordered w-full"
-					bind:value = {data.job.title}
+					bind:value={data.job.title}
 					required
 				/>
 				{#if 'title' in formErrors}
@@ -68,7 +89,7 @@
 					name="minAnnualCompensation"
 					placeholder="$ 40000"
 					class="input input-bordered w-full"
-					bind:value = {data.job.minAnnualCompensation}
+					bind:value={data.job.minAnnualCompensation}
 					required
 				/>
 				{#if 'minAnnualCompensation' in formErrors}
@@ -87,7 +108,7 @@
 					name="maxAnnualCompensation"
 					placeholder="$ 250000"
 					class="input input-bordered w-full"
-					bind:value = {data.job.maxAnnualCompensation}
+					bind:value={data.job.maxAnnualCompensation}
 					required
 				/>
 				{#if 'maxAnnualCompensation' in formErrors}
@@ -106,7 +127,7 @@
 					name="employer"
 					placeholder="eg: Ligma"
 					class="input input-bordered w-full"
-					bind:value = {data.job.employer}
+					bind:value={data.job.employer}
 					required
 				/>
 				{#if 'employer' in formErrors}
@@ -123,7 +144,7 @@
 					name="location"
 					placeholder="eg: Serdang"
 					class="input input-bordered w-full"
-					bind:value = {data.job.location}
+					bind:value={data.job.location}
 					required
 				/>
 				{#if 'location' in formErrors}
@@ -140,7 +161,7 @@
 					name="description"
 					placeholder=""
 					class="textarea textarea-bordered w-full"
-					bind:value = {data.job.description}
+					bind:value={data.job.description}
 					required
 				/>
 				{#if 'description' in formErrors}
@@ -157,7 +178,7 @@
 					name="requirement"
 					placeholder=""
 					class="textarea textarea-bordered w-full"
-					bind:value = {data.job.requirements}
+					bind:value={data.job.requirements}
 					required
 				/>
 				{#if 'requirement' in formErrors}
@@ -174,7 +195,7 @@
 					name="appinstruction"
 					placeholder=""
 					class="textarea textarea-bordered w-full h-32"
-					bind:value = {data.job.applicationInstructions}
+					bind:value={data.job.applicationInstructions}
 					required
 				/>
 				{#if 'appinstruction' in formErrors}

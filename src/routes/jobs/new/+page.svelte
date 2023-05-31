@@ -1,8 +1,8 @@
 <script>
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
-	let formErrors = {};
 	import { goto } from '$app/navigation';
 	import { getUserId } from '../../../utils/auth.js';
+	let formErrors = {};
 
 	function goSeeJob() {
 		goto('/');
@@ -10,9 +10,23 @@
 
 	async function createJob(evt) {
 		evt.preventDefault();
+
+		if (evt.target['minAnnualCompensation'].value < 1000) {
+			formErrors['minAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
+			return;
+		}
+		if (evt.target['maxAnnualCompensation'].value) {
+			formErrors['maxAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
+			return;
+		}
+		if (evt.target['appinstruction'].value.length < 10) {
+			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
+			return;
+		}
+
 		const userId = getUserId();
 		const jobData = {
-			user: userId, 
+			user: userId,
 			title: evt.target['title'].value,
 			minAnnualCompensation: evt.target['minAnnualCompensation'].value,
 			maxAnnualCompensation: evt.target['maxAnnualCompensation'].value,
@@ -34,7 +48,7 @@
 		if (resp.status == 200) {
 			goSeeJob();
 		} else {
-			alert('Failed to create job');
+			throw 'Failed to create job';
 		}
 	}
 </script>
@@ -176,7 +190,7 @@
 				{/if}
 
 				<div class="form-control w-full mt-8 mb-28">
-					<button class="btn btn-md">Post Job</button>
+					<button class="btn btn-md btn-secondary">Post Job</button>
 				</div>
 			</div>
 		</form>

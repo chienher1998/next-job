@@ -27,8 +27,9 @@
 	"type": "module",
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.4.0",
-		"daisyui": "^2.51.6",
+		"daisyui": "^2.52.0",
 		"humanize-plus": "^1.8.2",
-		"svelte-markdown": "^0.2.3"
+		"svelte-markdown": "^0.2.3",
+		"theme-change": "^2.5.0"
 	}
 }

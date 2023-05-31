@@ -2,19 +2,16 @@
 	import { authenticateUser } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
 	import { showLoginAlert, showWarning } from '../../../utils/alert.js';
+	import { writable } from 'svelte/store';
+
 	let formErrors = {};
-	let statusSpinner = false;
-
-	function setSpinnerTrue() {
-		statusSpinner = true;
-	}
-
+	let statusSpinner = writable(false);
 	function postLogIn() {
 		goto('/');
 	}
 	async function logInUser(evt) {
+		statusSpinner.set(true);
 		evt.preventDefault();
-		setSpinnerTrue();
 		const userData = {
 			username: evt.target['username'].value,
 			password: evt.target['password'].value
@@ -22,16 +19,28 @@
 		const res = await authenticateUser(userData.username, userData.password);
 
 		if (res.success) {
+			showWarning.set(false);
 			postLogIn();
 		} else {
+			statusSpinner.set(false);
 			showLoginAlert();
-			statusSpinner = false;
+		}
+	}
+
+	let sayHello = false;
+	let name = '';
+	function updateSayHello() {
+		if (name !== '') {
+			sayHello = true;
 		}
 	}
 </script>
 
 <div class="mx-10 my-3">
 	<h1 class="text-center text-xl">Login your account</h1>
+	{#if sayHello}
+		<h2 class="text-center text-md">Hi {name}</h2>
+	{/if}
 	<div class="flex justify-center items-center mt-8">
 		<form on:submit={logInUser} class="w-1/3">
 			<div class="form-control w-full">
@@ -43,6 +52,8 @@
 					name="username"
 					placeholder="Enter your username"
 					class="input input-bordered w-full"
+					bind:value={name}
+					on:input={updateSayHello}
 				/>
 			</div>
 			<div class="form-control w-full">
@@ -64,12 +75,8 @@
 			</div>
 
 			<div class="form-control w-full mt-4">
-				<button
-					class="btn btn-md"
-					on:click={() => {
-						showWarning.set(false);
-					}}>
-					{#if statusSpinner}
+				<button class="btn btn-md">
+					{#if $statusSpinner}
 						<div class="mx-5 visible">
 							<svg
 								width="24"
