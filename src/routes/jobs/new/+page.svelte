@@ -83,6 +83,10 @@
 					class="input input-bordered w-full"
 					required
 				/>
+				<label class="label" for="minAnnualCompensation">
+					<span class="label-text">USD</span>
+					<span class="label-text">per annum</span>
+				</label>
 				{#if 'minAnnualCompensation' in formErrors}
 					<label class="label" for="minAnnualCompensation">
 						<span class="label-text-alt text-red-500"
@@ -101,6 +105,10 @@
 					class="input input-bordered w-full"
 					required
 				/>
+				<label class="label" for="maxAnnualCompensation">
+					<span class="label-text">USD</span>
+					<span class="label-text">per annum</span>
+				</label>
 				{#if 'maxAnnualCompensation' in formErrors}
 					<label class="label" for="maxAnnualCompensation">
 						<span class="label-text-alt text-red-500"
@@ -110,7 +118,7 @@
 				{/if}
 
 				<label class="label" for="employer">
-					<span class="label-text">employer</span>
+					<span class="label-text">Employer</span>
 				</label>
 				<input
 					type="text"
@@ -148,7 +156,8 @@
 					type="text"
 					name="description"
 					placeholder=""
-					class="textarea textarea-bordered w-full"
+					rows= 10
+					class="textarea textarea-bordered w-full "
 					required
 				/>
 				{#if 'description' in formErrors}
@@ -164,6 +173,7 @@
 					type="text"
 					name="requirement"
 					placeholder=""
+					rows= 5
 					class="textarea textarea-bordered w-full"
 					required
 				/>

@@ -84,6 +84,7 @@
 				<label class="label" for="minAnnualCompensation">
 					<span class="label-text">Min Annual Compensation</span>
 				</label>
+
 				<input
 					type="number"
 					name="minAnnualCompensation"
@@ -92,6 +93,12 @@
 					bind:value={data.job.minAnnualCompensation}
 					required
 				/>
+
+				<label class="label" for="minAnnualCompensation">
+					<span class="label-text">USD</span>
+					<span class="label-text">per annum</span>
+				</label>
+
 				{#if 'minAnnualCompensation' in formErrors}
 					<label class="label" for="minAnnualCompensation">
 						<span class="label-text-alt text-red-500"
@@ -111,6 +118,10 @@
 					bind:value={data.job.maxAnnualCompensation}
 					required
 				/>
+				<label class="label" for="maxAnnualCompensation">
+					<span class="label-text">USD</span>
+					<span class="label-text">per annum</span>
+				</label>
 				{#if 'maxAnnualCompensation' in formErrors}
 					<label class="label" for="maxAnnualCompensation">
 						<span class="label-text-alt text-red-500"
@@ -120,7 +131,7 @@
 				{/if}
 
 				<label class="label" for="employer">
-					<span class="label-text">employer</span>
+					<span class="label-text">Employer</span>
 				</label>
 				<input
 					type="text"
@@ -161,6 +172,7 @@
 					name="description"
 					placeholder=""
 					class="textarea textarea-bordered w-full"
+					rows="10"
 					bind:value={data.job.description}
 					required
 				/>
@@ -177,6 +189,7 @@
 					type="text"
 					name="requirement"
 					placeholder=""
+					rows="5"
 					class="textarea textarea-bordered w-full"
 					bind:value={data.job.requirements}
 					required
