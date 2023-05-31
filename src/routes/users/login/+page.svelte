@@ -77,11 +77,10 @@
 			<div class="form-control w-full mt-4">
 				<button class="btn btn-md btn-primary">
 					{#if $statusSpinner}
-						<div class="mx-5 visible">
+						<div class="mx-5 fill-current visible">
 							<svg
 								width="24"
 								height="24"
-								fill="#C2CBF5"
 								viewBox="0 0 24 24"
 								xmlns="http://www.w3.org/2000/svg"
 								><style>
