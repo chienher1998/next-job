@@ -5,6 +5,7 @@
 </script>
 
 <header class="mx-10 mt-5">
+	<title>Next Jobs</title>
 	<nav class="navbar flex justify-between items-center">
 		<a href="/" class="btn btn-ghost normal-case text-xl" on:click={() => showWarning.set(false)}
 			>NEXT-JOBS</a
