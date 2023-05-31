@@ -75,7 +75,7 @@
 			</div>
 
 			<div class="form-control w-full mt-4">
-				<button class="btn btn-md">
+				<button class="btn btn-md btn-primary">
 					{#if $statusSpinner}
 						<div class="mx-5 visible">
 							<svg

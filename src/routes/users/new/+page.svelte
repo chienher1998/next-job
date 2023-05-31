@@ -130,7 +130,7 @@
 			</div>
 
 			<div class="form-control w-full mt-4">
-				<button class="btn btn-md">Create an Account</button>
+				<button class="btn btn-md btn-primary">Create an Account</button>
 			</div>
 		</form>
 	</div>

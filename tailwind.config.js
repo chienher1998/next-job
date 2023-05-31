@@ -1,13 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {},
-  },
-  plugins: [require("daisyui"),require('@tailwindcss/typography')],
-  daisyui: {
-    themes: ["retro", "dracula"],
-    darkTheme: "dracula",
-  },
-  
-}
+	content: ['./src/**/*.{html,js,svelte,ts}',  "./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}"],
+	theme: {
+		extend: {}
+	},
+	plugins: [require('daisyui'), require('@tailwindcss/typography'), require('flowbite/plugin')],
+	daisyui: {
+		themes: ["dracula","bumblebee"],
+	},
+};
+
