@@ -16,6 +16,18 @@ export function showLoginAlert() {
     resetTimeout()
 }
 
+export function showEditAlert() {
+	showWarning.set(true);
+	warningMsg.set('Failed to edit job !');
+    resetTimeout()
+}
+
+export function showJobAlert() {
+	showWarning.set(true);
+	warningMsg.set('Failed to create job !');
+    resetTimeout()
+}
+
 let timeoutId;
 
 function resetTimeout() {

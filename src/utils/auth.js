@@ -10,13 +10,13 @@ const emptyAuth = {
 
 export function logOut() {
 	isLoggedInStore.set(false);
-	localStorage.setItem('auth', JSON.stringify(emptyAuth)); // localStorage stores data temporary
+	localStorage.setItem('auth', JSON.stringify(emptyAuth));
 }
 
 export function getUserId() {
 	const auth = localStorage.getItem('auth');
 	if (auth) {
-		return JSON.parse(auth)['userId']; // change stringify to parse
+		return JSON.parse(auth)['userId'];
 	}
 	return null;
 }
@@ -28,7 +28,7 @@ export function getTokenFromLocalStorage() {
 	}
 	return null;
 }
-//function to update the login status
+
 export async function isLoggedIn() {
 	if (!getTokenFromLocalStorage()) {
 		return false;
@@ -53,9 +53,7 @@ export async function isLoggedIn() {
 					userId: res.record.id
 				})
 			);
-
-      isLoggedInStore.set(true);
-
+			isLoggedInStore.set(true); // Update the store with the logged-in status
 		} else {
 			return false;
 		}
@@ -63,6 +61,7 @@ export async function isLoggedIn() {
 		return false;
 	}
 }
+isLoggedIn();
 
 export async function authenticateUser(username, password) {
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/api/collections/users/auth-with-password', {
@@ -88,8 +87,8 @@ export async function authenticateUser(username, password) {
 			})
 		);
 
-		isLoggedInStore.set(true);
-    
+		isLoggedInStore.set(true); // Update the store with the logged-in status
+
 		return {
 			success: true,
 			res: res
@@ -101,5 +100,3 @@ export async function authenticateUser(username, password) {
 		res: res
 	};
 }
-
-

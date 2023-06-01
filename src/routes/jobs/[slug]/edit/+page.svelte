@@ -2,6 +2,9 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getUserId, getTokenFromLocalStorage } from './../../../../utils/auth.js';
+	import {statusSpinner} from '../../../../lib/component/spinner.js'
+	import Spinner from '../../../../lib/component/spinner.svelte'
+	import {showEditAlert, showWarning} from '../../../../utils/alert.js'
 	let formErrors = {};
 	export let data;
 
@@ -10,18 +13,22 @@
 	}
 
 	async function editJob(evt) {
+		statusSpinner.set(true)
 		evt.preventDefault();
 		formErrors = {}; // reset the formErrors
 		if (evt.target['minAnnualCompensation'].value < 1000) {
 			formErrors['minAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
+			statusSpinner.set(false)
 			return;
 		}
-		if (evt.target['maxAnnualCompensation'].value) {
+		if (evt.target['maxAnnualCompensation'].value < 1000) {
 			formErrors['maxAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
+			statusSpinner.set(false)
 			return;
 		}
 		if (evt.target['appinstruction'].value.length < 10) {
 			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
+			statusSpinner.set(false)
 			return;
 		}
 
@@ -29,6 +36,7 @@
 			// If there are form errors, stop the execution
 			return;
 		}
+
 		const userId = getUserId();
 		const jobData = {
 			user: userId,
@@ -54,9 +62,12 @@
 			}
 		);
 		if (resp.status == 200) {
+			showWarning.set(false)
+			statusSpinner.set(false)
 			goSeeJob();
 		} else {
-			throw 'Failed to edit job';
+			statusSpinner.set(false)
+			showEditAlert()
 		}
 	}
 </script>
@@ -71,7 +82,7 @@
 				<input
 					type="text"
 					name="title"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					bind:value={data.job.title}
 					required
 				/>
@@ -89,7 +100,7 @@
 					type="number"
 					name="minAnnualCompensation"
 					placeholder="$ 40000"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					bind:value={data.job.minAnnualCompensation}
 					required
 				/>
@@ -114,7 +125,7 @@
 					type="number"
 					name="maxAnnualCompensation"
 					placeholder="$ 250000"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					bind:value={data.job.maxAnnualCompensation}
 					required
 				/>
@@ -137,7 +148,7 @@
 					type="text"
 					name="employer"
 					placeholder="eg: Ligma"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					bind:value={data.job.employer}
 					required
 				/>
@@ -154,7 +165,7 @@
 					type="text"
 					name="location"
 					placeholder="eg: Serdang"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					bind:value={data.job.location}
 					required
 				/>
@@ -171,7 +182,7 @@
 					type="text"
 					name="description"
 					placeholder=""
-					class="textarea textarea-bordered w-full"
+					class="textarea textarea-bordered w-full textarea-info"
 					rows="10"
 					bind:value={data.job.description}
 					required
@@ -190,7 +201,7 @@
 					name="requirement"
 					placeholder=""
 					rows="5"
-					class="textarea textarea-bordered w-full"
+					class="textarea textarea-bordered w-full textarea-info"
 					bind:value={data.job.requirements}
 					required
 				/>
@@ -207,7 +218,7 @@
 					type="text"
 					name="appinstruction"
 					placeholder=""
-					class="textarea textarea-bordered w-full h-32"
+					class="textarea textarea-bordered w-full h-32 textarea-info "
 					bind:value={data.job.applicationInstructions}
 					required
 				/>
@@ -218,7 +229,7 @@
 				{/if}
 
 				<div class="form-control w-full mt-8 mb-28">
-					<button class="btn btn-md">Update</button>
+					<button class="btn btn-md btn-primary"><Spinner/>Update</button>
 				</div>
 			</div>
 		</form>

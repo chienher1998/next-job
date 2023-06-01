@@ -1,11 +1,12 @@
 <script>
-	import { authenticateUser } from '../../../utils/auth.js';
+	import { authenticateUser, isLoggedIn } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
 	import { showLoginAlert, showWarning } from '../../../utils/alert.js';
 	import { writable } from 'svelte/store';
+	let statusSpinner = writable(false);
 
 	let formErrors = {};
-	let statusSpinner = writable(false);
+
 	function postLogIn() {
 		goto('/');
 	}
@@ -73,16 +74,11 @@
 					</label>
 				{/if}
 			</div>
-
 			<div class="form-control w-full mt-4">
 				<button class="btn btn-md btn-primary">
 					{#if $statusSpinner}
 						<div class="mx-5 fill-current visible">
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
+							<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 								><style>
 									.spinner_9y7u {
 										animation: spinner_fUkk 2.4s linear infinite;
@@ -142,13 +138,8 @@
 							>
 						</div>
 					{:else}
-						<div class="mx-5 hidden">
-							<svg
-								width="24"
-								height="24"
-								fill="#C2CBF5"
-								viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg"
+						<div class="mx-5 fill-current hidden">
+							<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 								><style>
 									.spinner_9y7u {
 										animation: spinner_fUkk 2.4s linear infinite;
@@ -208,8 +199,8 @@
 							>
 						</div>
 					{/if}
-					Log In
-				</button>
+					Log In</button
+				>
 			</div>
 		</form>
 	</div>

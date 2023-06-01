@@ -9,7 +9,7 @@
   {#each data.jobs as job}
       <div class="flex flex-col mt-10 ">
           <div>
-            <a class="font-bold text-2xl" href="/jobs/{job.id}">{job.title}</a>
+            <a class="font-bold text-2xl text-secondary" href="/jobs/{job.id}">{job.title}</a>
               <div class="text-sm mt-1">
                   {job.employer} . {job.location} .
                   <span class="text-s-m">USD {humanize.formatNumber(job.minAnnualCompensation)} - USD {humanize.formatNumber(job.maxAnnualCompensation)}</span>
@@ -24,7 +24,7 @@
               >
           </div>
 
-          <div class="mt-4 ">
+          <div class="mt-4 text-gray-400">
               {job.description.slice(0, 240)}...
           </div>
       </div>
