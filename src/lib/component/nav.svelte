@@ -10,10 +10,6 @@
 		themeChange(false);
 	});
 
-	function goHome() {
-		goto('/');
-		showWarning.set(false);
-	}
 	function logIn() {
 		goto('/users/login/');
 		showWarning.set(false);
@@ -52,21 +48,24 @@
 
 <header class="mx-10 mt-5">
 	<nav class="navbar flex justify-between items-center items-center">
-		<div class="prose btn btn-ghost">
-			<label class="swap swap-flip text-2xl mr-2">
-				<!-- this hidden checkbox controls the state -->
-				<input type="checkbox" class="hidden" bind:checked={isChecked} disabled />
-				{#if darktheme}
-					<div class="swap-on">🐝</div> <!-- by default checkbox is off once refreshed-->
-					<div class="swap-off">😈</div>
-				{:else}
-					<div class="swap-off">🐝</div>
-					<div class="swap-on">😈</div>
-				{/if}
-			</label>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<h1 class=" normal-case text-xl prose text-primary" on:click={goHome}>NEXT-JOBS</h1>
+		<a href="/" on:click={()=>{showWarning.set(false);}}>
+		<div class="prose btn btn-ghost">		
+				<label class="swap swap-flip text-2xl mr-2">
+					<!-- this hidden checkbox controls the state -->
+					<input type="checkbox" class="hidden" bind:checked={isChecked} disabled />
+					{#if darktheme}
+						<div class="swap-on">🐝</div>
+						<!-- by default checkbox is off once refreshed-->
+						<div class="swap-off">😈</div>
+					{:else}
+						<div class="swap-off">🐝</div>
+						<div class="swap-on">😈</div>
+					{/if}
+				</label>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<h1 class=" normal-case text-xl prose text-primary">NEXT-JOBS</h1>
 		</div>
+	</a>
 		<div class="prose">
 			<label class="swap swap-rotate btn btn-ghost btn-md">
 				<input
@@ -77,6 +76,7 @@
 					bind:checked={isChecked}
 				/>
 				{#if darktheme}
+					<!-- by default checkbox is off once refreshed-->
 					<svg
 						class="swap-off fill-current w-5 h-5 text-secondary"
 						xmlns="http://www.w3.org/2000/svg"

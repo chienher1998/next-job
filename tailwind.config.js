@@ -10,19 +10,26 @@ module.exports = {
 	plugins: [require('daisyui'), require('@tailwindcss/typography'), require('flowbite/plugin')],
 	daisyui: {
 		themes: [
-			'dracula',
+			{
+				dracula: {
+					...require('daisyui/src/colors/themes')['[data-theme=dracula]'],
+					accent: '#BD93F9' //custom color for job title
+				}
+			},
 			{
 				bumblebee: {
 					...require('daisyui/src/colors/themes')['[data-theme=bumblebee]'],
 					background: '#fffbeb',
-					input : {
-						background :'#fae8a5',
+					neutral: '#fcf5d9',
+					accent: '#E0A82E',
+					input: {
+						background: '#fff4cc'
 					},
-					textarea :{
-						background : '#fae8a5'
+					textarea: {
+						background: '#fae8a5'
 					}
-				},
-			},
-		],
-	},
+				}
+			}
+		]
+	}
 };
