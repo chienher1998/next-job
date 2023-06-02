@@ -48,6 +48,7 @@ export function createJobAlert() {
     resetTimeout()
 }
 
+
 let timeoutId;
 
 function resetTimeout() {

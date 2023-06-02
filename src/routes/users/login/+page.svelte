@@ -6,6 +6,7 @@
 	import { statusSpinner } from '../../../lib/component/spinner.js';
 
 	let formErrors = {};
+	let msg = "Login";
 
 	function postLogIn() {
 		goto('/');
@@ -13,6 +14,7 @@
 	}
 	async function logInUser(evt) {
 		statusSpinner.set(true);
+		msg = "Logging In";
 		evt.preventDefault();
 		const userData = {
 			username: evt.target['username'].value,
@@ -25,6 +27,7 @@
 			showWarning.set(false);
 			postLogIn();
 		} else {
+			msg = "Login";
 			statusSpinner.set(false);
 			showLoginAlert();
 		}
@@ -39,7 +42,7 @@
 	}
 </script>
 
-<div class="mx-10 my-3">
+<div class="mx-auto my-3 bg-neutral rounded-box max-w-lg py-20 ease-in duration-200">
 	<div class="prose mx-auto">
 		<h1 class="text-center text-xl">Login your account</h1>
 	</div>
@@ -47,7 +50,7 @@
 		<h2 class="text-center text-md">Hi {name}</h2>
 	{/if}
 	<div class="flex justify-center items-center mt-8">
-		<form on:submit={logInUser} class="w-1/3">
+		<form on:submit={logInUser} class="w-full mx-10">
 			<div class="form-control w-full">
 				<label class="label" for="username">
 					<span class="label-text">Username</span>
@@ -78,10 +81,10 @@
 					</label>
 				{/if}
 			</div>
-			<div class="form-control w-full mt-4">
+			<div class="form-control w-full mt-10">
 				<button class="btn btn-md btn-primary">
 					<Spinner />
-					Log In</button
+					{msg}</button
 				>
 			</div>
 		</form>

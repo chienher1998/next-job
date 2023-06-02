@@ -5,11 +5,11 @@
 
 <div class="container mx-auto">
 	<div class="prose text-center mx-auto">
-		<h1 class=" text-xl">Find Your Next Job</h1>
+		<h1 class="mb-5 text-xl">Find Your Next Job</h1>
 	</div>
-	<div class="mx-auto overflow-x-auto max-w-7xl">
+	<div class="mx-auto overflow-x-auto max-w-8xl">
 		{#each data.jobs as job}
-			<div class="flex flex-col mt-10 bg-neutral rounded-box p-2">
+			<div class="flex flex-col mt-5 mx-10 bg-neutral rounded-box p-2 scale-95 hover:scale-100 ease-in duration-200">
 				<a href="/jobs/{job.id}">
 					<div class="m-5">
 						<a class="font-bold text-2xl text-accent" href="/jobs/{job.id}">{job.title}</a>

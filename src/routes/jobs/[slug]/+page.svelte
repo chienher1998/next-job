@@ -47,7 +47,7 @@
 				{#if getUserId() === data.job.user}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div class="btn btn-ghost hover:text-sky-400 ml-4">
-						<i class="fa-solid fa-pen-to-square fa-lg cursor-pointer" on:click={postEdit} />
+						<i class="fa-solid fa-pen-to-square fa-lg cursor-pointer " on:click={postEdit} />
 					</div>
 
 					<a href="#my_modal_8" class="btn btn-ghost hover:text-rose-600">
@@ -77,7 +77,7 @@
 	</div>
 
 	<div class="flex flex-row w-full mt-8">
-		<div class="basis-2/3 prose max-w-none w-full bg-neutral rounded-box p-8">
+		<div class="basis-2/3 prose max-w-none w-full bg-neutral rounded-box p-8 ease-in duration-200">
 			<h2 class="text-xl stat-value">Description</h2>
 			<SvelteMarkdown source={data.job.description} />
 			<div class="mt-6" />
@@ -87,7 +87,7 @@
 			<h2 class="text-xl stat-value">How to Apply?</h2>
 			<p>{data.job.applicationInstructions}</p>
 		</div>
-		<div class="basis-1/5 ml-5 bg-neutral p-5 rounded-box max-h-64">
+		<div class="basis-1/5 ml-5 bg-neutral p-5 rounded-box max-h-64 ease-in duration-200">
 			<h2 class="text-lg font-thin">Location</h2>
 			<p class="stat-value text-lg">{data.job.location}</p>
 			<div class="mt-6 stat" />

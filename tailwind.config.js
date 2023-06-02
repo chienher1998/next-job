@@ -22,11 +22,12 @@ module.exports = {
 					background: '#fffbeb',
 					neutral: '#fcf5d9',
 					accent: '#E0A82E',
+					
 					input: {
-						background: '#fff4cc'
+						background: '#FFFBEB'
 					},
 					textarea: {
-						background: '#fae8a5'
+						background: '#FFFBEB'
 					}
 				}
 			}

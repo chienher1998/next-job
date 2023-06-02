@@ -2,8 +2,12 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { authenticateUser } from './../../../utils/auth.js';
-	import { showWarning } from '../../../utils/alert.js';
-	showWarning;
+	import { showLoginAlert, showWarning } from '../../../utils/alert.js';
+	import Spinner from '../../../lib/component/spinner.svelte';
+	import { statusSpinner } from '../../../lib/component/spinner.js';
+	
+
+	let msg = "CREATE AN ACCOUNT";
 	let formErrors = {};
 
 	function postSignUp() {
@@ -11,10 +15,13 @@
 	}
 
 	async function createUser(evt) {
+		msg = "CREATING"
+		statusSpinner.set(true);
 		evt.preventDefault();
 
 		if (evt.target['password'].value != evt.target['password-confirmation'].value) {
 			formErrors['password'] = { message: 'Password confirmation does not match' };
+			statusSpinner.set(false);
 			return;
 		}
 
@@ -38,19 +45,24 @@
 			const res = await authenticateUser(userData.username, userData.password);
 
 			if (res.success) {
+				showWarning.set(false)
+				statusSpinner.set(false);
 				postSignUp();
 			} else {
+				statusSpinner.set(false);
+				showLoginAlert()
 				throw 'Sign up succeeded but authentication failed';
 			}
 		} else {
+			statusSpinner.set(false);
 			const res = await resp.json();
 			formErrors = res.data;
 		}
 	}
 </script>
 
-<div class="mx-10 my-3">
-	<div class="prose mx-auto text-center">
+<div class="mx-auto my-3 bg-neutral rounded-box max-w-lg py-20 ease-in duration-200">
+	<div class="prose mx-auto text-center ">
 		<h1 class=" text-xl">Create an Account to Post a Job</h1>
 			<a
 				class="link-hover italic text-xs"
@@ -60,7 +72,7 @@
 			>
 	</div>
 	<div class="flex justify-center items-center mt-8">
-		<form on:submit={createUser} class="w-1/3">
+		<form on:submit={createUser} class="w-full mx-10">
 			<div class="form-control w-full">
 				<label class="label" for="username">
 					<span class="label-text">Username</span>
@@ -85,7 +97,7 @@
 				<input
 					type="email"
 					name="email"
-					placeholder="john@example.com"
+					placeholder="job@example.com"
 					class="input input-bordered w-full"
 					required
 				/>
@@ -103,7 +115,7 @@
 				<input
 					type="password"
 					name="password"
-					placeholder=""
+					placeholder="Create Password"
 					class="input input-bordered w-full"
 					required
 				/>
@@ -121,7 +133,7 @@
 				<input
 					type="password"
 					name="password-confirmation"
-					placeholder=""
+					placeholder="Confirm Password"
 					class="input input-bordered w-full"
 					required
 				/>
@@ -132,9 +144,11 @@
 				{/if}
 			</div>
 
-			<div class="form-control w-full mt-4">
-				<button class="btn btn-md btn-primary">Create an Account</button>
+			<div class="form-control w-full mt-10">
+				<button class="btn btn-md btn-primary"><Spinner/>Create an Account</button>
 			</div>
 		</form>
 	</div>
 </div>
+
+
