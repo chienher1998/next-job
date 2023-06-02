@@ -2,13 +2,14 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getUserId } from '../../../utils/auth.js';
-	import { showJobAlert, showWarning } from '../../../utils/alert.js';
+	import { showJobAlert, showWarning, createJobAlert } from '../../../utils/alert.js';
 	import { statusSpinner } from '$lib/component/spinner.js';
 	import Spinner from '$lib/component/spinner.svelte';
 	let formErrors = {};
 
 	function goSeeJob() {
 		goto('/');
+		createJobAlert()
 	}
 
 	async function createJob(evt) {
@@ -75,7 +76,7 @@
 					type="text"
 					name="title"
 					placeholder="Enter Job Title"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					required
 				/>
 				{#if 'title' in formErrors}
@@ -91,7 +92,7 @@
 					type="number"
 					name="minAnnualCompensation"
 					placeholder="$ 40000"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					required
 				/>
 				<label class="label" for="minAnnualCompensation">
@@ -113,7 +114,7 @@
 					type="number"
 					name="maxAnnualCompensation"
 					placeholder="$ 250000"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					required
 				/>
 				<label class="label" for="maxAnnualCompensation">
@@ -135,7 +136,7 @@
 					type="text"
 					name="employer"
 					placeholder="eg: Ligma"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					required
 				/>
 				{#if 'employer' in formErrors}
@@ -151,7 +152,7 @@
 					type="text"
 					name="location"
 					placeholder="eg: Serdang"
-					class="input input-bordered w-full"
+					class="input input-bordered w-full input-info"
 					required
 				/>
 				{#if 'location' in formErrors}
@@ -168,7 +169,7 @@
 					name="description"
 					placeholder=""
 					rows="10"
-					class="textarea textarea-bordered w-full"
+					class="textarea textarea-bordered w-full textarea-info"
 					required
 				/>
 				{#if 'description' in formErrors}
@@ -185,7 +186,7 @@
 					name="requirement"
 					placeholder=""
 					rows="5"
-					class="textarea textarea-bordered w-full"
+					class="textarea textarea-bordered w-full textarea-info"
 					required
 				/>
 				{#if 'requirement' in formErrors}
@@ -201,7 +202,7 @@
 					type="text"
 					name="appinstruction"
 					placeholder=""
-					class="textarea textarea-bordered w-full h-32"
+					class="textarea textarea-bordered w-full h-32 textarea-info"
 					required
 				/>
 				{#if 'appinstruction' in formErrors}

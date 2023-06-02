@@ -1,14 +1,15 @@
 <script>
-	import { authenticateUser, isLoggedIn } from '../../../utils/auth.js';
+	import { authenticateUser } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
-	import { showLoginAlert, showWarning } from '../../../utils/alert.js';
-	import { writable } from 'svelte/store';
-	let statusSpinner = writable(false);
+	import { showLoginAlert, showWarning, loginSucAlert } from '../../../utils/alert.js';
+	import Spinner from '../../../lib/component/spinner.svelte';
+	import { statusSpinner } from '../../../lib/component/spinner.js';
 
 	let formErrors = {};
 
 	function postLogIn() {
 		goto('/');
+		loginSucAlert()
 	}
 	async function logInUser(evt) {
 		statusSpinner.set(true);
@@ -20,6 +21,7 @@
 		const res = await authenticateUser(userData.username, userData.password);
 
 		if (res.success) {
+			statusSpinner.set(false);
 			showWarning.set(false);
 			postLogIn();
 		} else {
@@ -38,7 +40,9 @@
 </script>
 
 <div class="mx-10 my-3">
-	<h1 class="text-center text-xl">Login your account</h1>
+	<div class="prose mx-auto">
+		<h1 class="text-center text-xl">Login your account</h1>
+	</div>
 	{#if sayHello}
 		<h2 class="text-center text-md">Hi {name}</h2>
 	{/if}
@@ -76,129 +80,7 @@
 			</div>
 			<div class="form-control w-full mt-4">
 				<button class="btn btn-md btn-primary">
-					{#if $statusSpinner}
-						<div class="mx-5 fill-current visible">
-							<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-								><style>
-									.spinner_9y7u {
-										animation: spinner_fUkk 2.4s linear infinite;
-										animation-delay: -2.4s;
-									}
-									.spinner_DF2s {
-										animation-delay: -1.6s;
-									}
-									.spinner_q27e {
-										animation-delay: -0.8s;
-									}
-									@keyframes spinner_fUkk {
-										8.33% {
-											x: 13px;
-											y: 1px;
-										}
-										25% {
-											x: 13px;
-											y: 1px;
-										}
-										33.3% {
-											x: 13px;
-											y: 13px;
-										}
-										50% {
-											x: 13px;
-											y: 13px;
-										}
-										58.33% {
-											x: 1px;
-											y: 13px;
-										}
-										75% {
-											x: 1px;
-											y: 13px;
-										}
-										83.33% {
-											x: 1px;
-											y: 1px;
-										}
-									}
-								</style><rect class="spinner_9y7u" x="1" y="1" rx="1" width="10" height="10" /><rect
-									class="spinner_9y7u spinner_DF2s"
-									x="1"
-									y="1"
-									rx="1"
-									width="10"
-									height="10"
-								/><rect
-									class="spinner_9y7u spinner_q27e"
-									x="1"
-									y="1"
-									rx="1"
-									width="10"
-									height="10"
-								/></svg
-							>
-						</div>
-					{:else}
-						<div class="mx-5 fill-current hidden">
-							<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-								><style>
-									.spinner_9y7u {
-										animation: spinner_fUkk 2.4s linear infinite;
-										animation-delay: -2.4s;
-									}
-									.spinner_DF2s {
-										animation-delay: -1.6s;
-									}
-									.spinner_q27e {
-										animation-delay: -0.8s;
-									}
-									@keyframes spinner_fUkk {
-										8.33% {
-											x: 13px;
-											y: 1px;
-										}
-										25% {
-											x: 13px;
-											y: 1px;
-										}
-										33.3% {
-											x: 13px;
-											y: 13px;
-										}
-										50% {
-											x: 13px;
-											y: 13px;
-										}
-										58.33% {
-											x: 1px;
-											y: 13px;
-										}
-										75% {
-											x: 1px;
-											y: 13px;
-										}
-										83.33% {
-											x: 1px;
-											y: 1px;
-										}
-									}
-								</style><rect class="spinner_9y7u" x="1" y="1" rx="1" width="10" height="10" /><rect
-									class="spinner_9y7u spinner_DF2s"
-									x="1"
-									y="1"
-									rx="1"
-									width="10"
-									height="10"
-								/><rect
-									class="spinner_9y7u spinner_q27e"
-									x="1"
-									y="1"
-									rx="1"
-									width="10"
-									height="10"
-								/></svg
-							>
-						</div>
-					{/if}
+					<Spinner />
 					Log In</button
 				>
 			</div>

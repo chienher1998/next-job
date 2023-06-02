@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { authenticateUser } from './../../../utils/auth.js';
 	import { showWarning } from '../../../utils/alert.js';
-	showWarning
+	showWarning;
 	let formErrors = {};
 
 	function postSignUp() {
@@ -50,11 +50,14 @@
 </script>
 
 <div class="mx-10 my-3">
-	<h1 class="text-center text-xl">Create an Account to Post a Job</h1>
-	<div class="text-center">
-		<a class="link-hover italic text-xs" href="../../users/login" on:click={() => showWarning.set(false)}
-			>Already have an account? Click here to login instead.</a
-		>
+	<div class="prose mx-auto text-center">
+		<h1 class=" text-xl">Create an Account to Post a Job</h1>
+			<a
+				class="link-hover italic text-xs"
+				href="../../users/login"
+				on:click={() => showWarning.set(false)}
+				>Already have an account? Click here to login instead.</a
+			>
 	</div>
 	<div class="flex justify-center items-center mt-8">
 		<form on:submit={createUser} class="w-1/3">

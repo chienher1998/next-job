@@ -61,7 +61,7 @@ export async function isLoggedIn() {
 		return false;
 	}
 }
-isLoggedIn();
+
 
 export async function authenticateUser(username, password) {
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/api/collections/users/auth-with-password', {

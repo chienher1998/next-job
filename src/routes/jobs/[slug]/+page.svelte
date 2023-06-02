@@ -5,10 +5,12 @@
 	import { getTokenFromLocalStorage } from '../../../utils/auth.js';
 	import { getUserId } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
+	import {deleteAlert} from '../../../utils/alert.js'
 	export let data;
 
 	function goSeeJob() {
 		goto('/');
+		deleteAlert()
 	}
 	function postEdit() {
 		goto(`/jobs/${data.job.id}/edit`);

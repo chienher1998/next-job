@@ -1,33 +1,39 @@
 <script>
-  export let data;
-  import humanize from 'humanize-plus';
+	export let data;
+	import humanize from 'humanize-plus';
 </script>
 
 <div class="container mx-auto">
-<h1 class="text-center text-xl font-bold">Find Your Next Job</h1>
-<div class="mx-auto overflow-x-auto max-w-7xl">
-  {#each data.jobs as job}
-      <div class="flex flex-col mt-10 ">
-          <div>
-            <a class="font-bold text-2xl text-secondary" href="/jobs/{job.id}">{job.title}</a>
-              <div class="text-sm mt-1">
-                  {job.employer} . {job.location} .
-                  <span class="text-s-m">USD {humanize.formatNumber(job.minAnnualCompensation)} - USD {humanize.formatNumber(job.maxAnnualCompensation)}</span>
-              </div>
-              <div class="italic text-xs opacity-50 mt-2"
-                  >posted {new Date(job.created).toLocaleDateString(undefined, {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                  })}</div
-              >
-          </div>
+	<div class="prose text-center mx-auto">
+		<h1 class=" text-xl">Find Your Next Job</h1>
+	</div>
+	<div class="mx-auto overflow-x-auto max-w-7xl">
+		{#each data.jobs as job}
+			<div class="flex flex-col mt-10">
+				<div>
+					<a class="font-bold text-2xl text-secondary" href="/jobs/{job.id}">{job.title}</a>
+					<div class="text-sm mt-1">
+						{job.employer} . {job.location} .
+						<span class="text-s-m"
+							>USD {humanize.formatNumber(job.minAnnualCompensation)} - USD {humanize.formatNumber(
+								job.maxAnnualCompensation
+							)}</span
+						>
+					</div>
+					<div class="italic text-xs opacity-50 mt-2">
+						posted {new Date(job.created).toLocaleDateString(undefined, {
+							weekday: 'long',
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						})}
+					</div>
+				</div>
 
-          <div class="mt-4 text-gray-400">
-              {job.description.slice(0, 240)}...
-          </div>
-      </div>
-  {/each}
-</div>
+				<div class="mt-4">
+					{job.description.slice(0, 240)}...
+				</div>
+			</div>
+		{/each}
+	</div>
 </div>

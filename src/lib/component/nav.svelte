@@ -1,28 +1,67 @@
 <script>
-	import { warningMsg, showWarning, showAlert } from '../../utils/alert.js';
+	import { warningMsg, showWarning, showAlert, successWarning } from '../../utils/alert.js';
 	import { isLoggedInStore, logOut } from '../../utils/auth.js';
-    import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
+	import { goto } from '$app/navigation';
+	import { statusSpinner } from '../component/spinner.js';
+
 	onMount(() => {
 		themeChange(false);
 	});
+
+	function goHome() {
+		goto('/');
+		showWarning.set(false);
+	}
+	function logIn() {
+		goto('/users/login/');
+		showWarning.set(false);
+	}
+	function logOutB() {
+		goto('/');
+		statusSpinner.set(false);
+		successWarning.set(false);
+		logOut();
+	}
+	function postJob() {
+		goto('/jobs/new/');
+	}
+	function signUp() {
+		showAlert();
+		goto('/users/new/');
+	}
+
+	let isChecked = false;
+
+	toggleCheckboxes => {
+		isChecked = !isChecked;
+	}
 </script>
 
 <header class="mx-10 mt-5">
-	<nav class="navbar flex justify-between items-center">
-		<a href="/" class="btn btn-ghost normal-case text-xl text-primary" on:click={() => showWarning.set(false)}
-			>NEXT-JOBS</a
-		>
-		<div>
+	<nav class="navbar flex justify-between items-center items-center">
+		<div class="prose btn btn-ghost">
+			<label class="swap swap-flip text-2xl mr-2">
+				<!-- this hidden checkbox controls the state -->
+				<input type="checkbox" class="hidden" bind:checked={isChecked} disabled/>
+				<div class="swap-on">🐝</div>
+				<div class="swap-off">😈</div>
+			</label>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<h1 class=" normal-case text-xl prose text-primary" on:click={goHome}>NEXT-JOBS</h1>
+		</div>
+		<div class="prose">
 			<label class="swap swap-rotate btn btn-ghost">
 				<input
 					type="checkbox"
-					data-toggle-theme="bumblebee, dracula"
+					data-toggle-theme="bumblebee,dracula"
 					data-act-class="ACTIVECLASS"
 					class="hidden"
+					bind:checked={isChecked}
 				/>
 				<svg
-					class="swap-off fill-current w-5 h-7 text-primary"
+					class="swap-on fill-current w-5 h-7 text-primary"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="2 3 20 18"
 					><path
@@ -30,7 +69,7 @@
 					/></svg
 				>
 				<svg
-					class="swap-on fill-current w-5 h-5 text-secondary"
+					class="swap-off fill-current w-5 h-5 text-secondary"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					><path
@@ -39,18 +78,21 @@
 				>
 			</label>
 			{#if $isLoggedInStore}
-				<a href="/jobs/new/" class="btn btn-primary mx-3">Post Job</a>
-				<a on:click={logOut} href="/" class="btn btn-primary">Log Out</a>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<h1 on:click={postJob} class="btn btn-primary m-3 text-sm">Post Job</h1>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<h1 on:click={logOutB} class="btn btn-primary text-sm">Log Out</h1>
 			{:else}
-				<a href="/users/new/" class="btn btn-ghost mx-3 text-primary" on:mousedown={showAlert}>Post Job</a>
-				<a href="/users/login/" class="btn btn-ghost text-primary" on:click={() => showWarning.set(false)}
-					>Login</a
-				>
+				<h1 class="btn btn-ghost m-3 text-primary text-sm" on:mousedown={signUp}>Post Job</h1>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<h1 class="btn btn-ghost text-primary text-sm" on:click={logIn}>Login</h1>
 			{/if}
 		</div>
 	</nav>
 	{#if $showWarning}
-		<div class="container alert alert-warning shadow-lg mt-5 mx-auto">
+		<div
+			class="container alert alert-warning shadow-lg max-w-sm mx-auto mb-2 rounded-box flex justify-center animate-bounce"
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -63,7 +105,26 @@
 					d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 				/></svg
 			>
-			<span class="absolute ml-8">{$warningMsg}</span>
+			<span class="text-center">{$warningMsg}</span>
+		</div>
+	{/if}
+	{#if $successWarning}
+		<div
+			class="container alert alert-success shadow-lg max-w-xs mx-auto mb-2 rounded-box flex justify-center animate-bounce"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="stroke-current shrink-0 h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				><path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+				/></svg
+			>
+			<span class="text-center">{$warningMsg}</span>
 		</div>
 	{/if}
 </header>

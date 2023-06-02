@@ -3,6 +3,8 @@ import { writable } from 'svelte/store';
 export const warningMsg = writable('');
 
 export const showWarning = writable(false);
+export const successWarning = writable(false);
+
 
 export function showAlert() {
 	showWarning.set(true);
@@ -28,12 +30,31 @@ export function showJobAlert() {
     resetTimeout()
 }
 
+export function deleteAlert() {
+	successWarning.set(true);
+	warningMsg.set('Deleted Job Successfully !');
+    resetTimeout()
+}
+
+export function loginSucAlert() {
+	successWarning.set(true);
+	warningMsg.set('Successfully Logged In !');
+    resetTimeout()
+}
+
+export function createJobAlert() {
+	successWarning.set(true);
+	warningMsg.set('Successfully Created Job !');
+    resetTimeout()
+}
+
 let timeoutId;
 
 function resetTimeout() {
   clearTimeout(timeoutId);
   timeoutId = setTimeout(() => {
-    showWarning.set(false);
+    const variable = [showWarning, successWarning]
+    variable.forEach((index) => index.set(false));
   }, 5000);
 }
 
