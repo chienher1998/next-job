@@ -47,7 +47,7 @@
 </script>
 
 <header class="mx-10 mt-5">
-	<nav class="navbar flex justify-between items-center items-center">
+	<nav class="navbar flex flex-col sm:flex-row justify-between items-center"> <!--sm: meaning breakpoint starting from 640px and above-->
 		<a href="/" on:click={()=>{showWarning.set(false);}}>
 		<div class="prose btn btn-ghost">		
 				<label class="swap swap-flip text-2xl mr-2">
