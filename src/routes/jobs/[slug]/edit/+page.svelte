@@ -20,13 +20,11 @@
 			formErrors['minAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
 			statusSpinner.set(false)
 			return;
-		}
-		if (evt.target['maxAnnualCompensation'].value < 1000) {
+		}else if (evt.target['maxAnnualCompensation'].value < 1000) {
 			formErrors['maxAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
 			statusSpinner.set(false)
 			return;
-		}
-		if (evt.target['appinstruction'].value.length < 10) {
+		}else if (evt.target['appinstruction'].value.length < 10) {
 			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
 			statusSpinner.set(false)
 			return;

@@ -37,6 +37,8 @@
 	(toggleCheckboxes) => {
 		isChecked = !isChecked;
 	};
+
+	
 </script>
 
 <header class="mx-10 mt-5">
@@ -45,20 +47,18 @@
 			<label class="swap swap-flip text-2xl mr-2">
 				<!-- this hidden checkbox controls the state -->
 				<input type="checkbox" class="hidden" bind:checked={isChecked} disabled/>
-				<div class="swap-on" data-set-theme="bumblebee" data-act-class="ACTIVECLASS">🐝</div>
-				<div class="swap-off" data-set-theme="dracula" data-act-class="ACTIVECLASS">😈</div>
+				<div class="swap-on">🐝</div>
+				<div class="swap-off">😈</div>
 			</label>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<h1 class=" normal-case text-xl prose text-primary" on:click={goHome}>NEXT-JOBS</h1>
 		</div>
 		<div class="prose">
-			<label class="swap swap-rotate btn btn-ghost">
-				<input type="checkbox" class="hidden" bind:checked={isChecked} />
+			<label class="swap swap-rotate btn btn-ghost btn-md">
+				<input type="checkbox" data-toggle-theme="bumblebee,dracula" data-act-class="ACTIVECLASS" class="w-full h-full hidden"bind:checked={isChecked} />
 				<!-- sun icon -->
 				<svg
-					data-set-theme="bumblebee"
-					data-act-class="ACTIVECLASS"
-					class="swap-on fill-current w-7 h-7 text-primary"
+					class="swap-on fill-current w-6 h-6 text-primary"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					><path
@@ -67,8 +67,6 @@
 				>
 				<!-- moon icon -->
 				<svg
-					data-set-theme="dracula"
-					data-act-class="ACTIVECLASS"
 					class="swap-off fill-current w-7 h-7 text-secondary"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
