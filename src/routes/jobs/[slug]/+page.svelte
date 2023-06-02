@@ -47,11 +47,11 @@
 				{#if getUserId() === data.job.user}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div class="btn btn-ghost hover:text-sky-400 ml-4">
-						<i class="fa-solid fa-pen-to-square fa-lg cursor-pointer " on:click={postEdit} />
+						<i class="fa fa-solid fa-pen-to-square fa-lg cursor-pointer " on:click={postEdit} />
 					</div>
 
 					<a href="#my_modal_8" class="btn btn-ghost hover:text-rose-600">
-						<i class="fa-solid fa-trash-can fa-lg cursor-pointer" /></a
+						<i class="fa fa-solid fa-trash-can fa-lg cursor-pointer" /></a
 					>
 					<!-- Put this part before </body> tag -->
 					<div class="modal" id="my_modal_8">
