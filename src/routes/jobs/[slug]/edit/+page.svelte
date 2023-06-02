@@ -18,22 +18,14 @@
 		formErrors = {}; // reset the formErrors
 		if (evt.target['minAnnualCompensation'].value < 1000) {
 			formErrors['minAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
-			statusSpinner.set(false)
-			return;
-		}else if (evt.target['maxAnnualCompensation'].value < 1000) {
+		}
+		if (evt.target['maxAnnualCompensation'].value < 1000) {
 			formErrors['maxAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
-			statusSpinner.set(false)
-			return;
-		}else if (evt.target['appinstruction'].value.length < 10) {
+		}
+		if (evt.target['appinstruction'].value.length < 10) {
 			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
-			statusSpinner.set(false)
-			return;
 		}
 
-		if (Object.keys(formErrors).length > 0) {
-			// If there are form errors, stop the execution
-			return;
-		}
 
 		const userId = getUserId();
 		const jobData = {

@@ -5,7 +5,6 @@
 	import { themeChange } from 'theme-change';
 	import { goto } from '$app/navigation';
 	import { statusSpinner } from '../component/spinner.js';
-	import { writable } from 'svelte/store';
 
 	onMount(() => {
 		themeChange(false);
@@ -97,7 +96,7 @@
 	</nav>
 	{#if $showWarning}
 		<div
-			class="container alert alert-warning shadow-lg max-w-sm mx-auto mb-2 rounded-box flex justify-center animate-bounce"
+			class="container alert alert-warning shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
