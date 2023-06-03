@@ -35,26 +35,29 @@
 	}
 	function calDate() {
 		const creationDate = new Date(data.job.created);
+		console.log(creationDate)
 		const currentDate = new Date();
-		const timeDiff = currentDate - creationDate;
+		console.log(currentDate)
+		const timeDiff = currentDate - creationDate; //returns miliseconds
+		console.log(timeDiff)
 
 		let timeElapsed;
-		if (timeDiff >= 86400000) { //24 hours * 60 minutes * 60 seconds * 1000 milliseconds = 86400000 milliseconds
+		if (timeDiff >= 86400000) { //a day 24hrs in miliseconds 		
 			// If more than 24 hours have passed, display the number of days
-			const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-			timeElapsed = `${daysDiff} day${daysDiff !== 1 ? 's ago' : ''}`;
-		} else if (timeDiff >= 3600000) {
+			const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));//24 hours * 60 minutes * 60 seconds * 1000 milliseconds = 86400000 milliseconds
+			timeElapsed = `${daysDiff} day ago`;
+		} else if (timeDiff >= 3600000) { //convert 60mins to miliseconds
 			// If more than 1 hour has passed, display the number of hours
 			const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
 			timeElapsed = `${hoursDiff} hours ago`;
-		} else if (timeDiff >= 60000) {
+		} else if (timeDiff >= 60000) { //convert 60sec to miliseconds
 			// If more than 1 minute has passed, display the number of minutes
 			const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-			timeElapsed = `${minutesDiff} minute${minutesDiff !== 1 ? 's ago' : ''}`;
+			timeElapsed = `${minutesDiff} ago`;
 		} else {
 			// Display the number of seconds
 			const secondsDiff = Math.floor(timeDiff / 1000);
-			timeElapsed = `${secondsDiff} second${secondsDiff !== 1 ? 's ago' : ''}`;
+			timeElapsed = `${secondsDiff}`;
 		}
 
 		return timeElapsed;
@@ -65,7 +68,7 @@
 	<link href="./../node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 </head>
 
-<div class="relative container my-10 mx-auto max-w-7xl">
+<div class="sm:relative container my-10 mx-auto max-w-7xl">
 	<div class="flex flex-col items-center sm:flex-row">
 		<div class="sm:flex-1 sm:ml-3 text-center sm:text-start max-w-xs">
 			<h1 class="text-3xl font-extrabold text-accent" for="title">{data.job.title}</h1>
@@ -73,7 +76,6 @@
 		</div>
 		{#if getUserId() === data.job.user}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="text-center">
 				<div class="btn btn-ghost hover:text-sky-400" on:click={postEdit}>
 					<svg
 						viewBox="0 3 30 30"
@@ -130,7 +132,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		{:else}
 			<i class="" />
 		{/if}
@@ -150,7 +151,7 @@
 			<p>{data.job.applicationInstructions}</p>
 		</div>
 		<div
-			class="sticky top-40 basis-1/5 sm:ml-5 bg-neutral p-5 rounded-box max-h-72 ease-in duration-200"
+			class="sm:sticky top-28 basis-1/5 sm:ml-5 bg-neutral p-5 rounded-box max-h-72 ease-in duration-200"
 		>
 			<h2 class="text-lg stat-value">Location</h2>
 			<p class="stat-title">{data.job.location}</p>
@@ -162,7 +163,7 @@
 			</p>
 			<p class="stat-desc">USD per annum</p>
 			<h2 class="mt-6 text-lg stat-value">Created</h2>
-			<p class="stat-title ">{calDate()}</p>
+			<p class="stat-title">{calDate()}</p>
 		</div>
 	</div>
 </div>

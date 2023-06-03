@@ -61,7 +61,7 @@
 	}
 </script>
 
-<div class="mx-auto my-3 bg-neutral rounded-box max-w-lg py-20 ease-in duration-200">
+<div class="mx-auto my-10 bg-neutral rounded-box max-w-lg py-10 ease-in duration-200 shadow-2xl">
 	<div class="prose mx-auto text-center ">
 		<h1 class=" text-xl">Create an Account to Post a Job</h1>
 			<a

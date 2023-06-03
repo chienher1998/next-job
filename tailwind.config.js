@@ -13,12 +13,19 @@ module.exports = {
 			{
 				dracula: {
 					...require('daisyui/src/colors/themes')['[data-theme=dracula]'],
-					accent: '#BD93F9' //custom color for job title
+					accent: '#BD93F9',
+					 //custom color for job title
+					 header: {
+						background :'#282A36'
+					 }
 				}
 			},
 			{
 				bumblebee: {
 					...require('daisyui/src/colors/themes')['[data-theme=bumblebee]'],
+					header: {
+						background :'#FFFBEB'
+					 },
 					background: '#fffbeb',
 					neutral: '#fcf5d9',
 					accent: '#E0A82E',

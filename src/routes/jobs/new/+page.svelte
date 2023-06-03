@@ -59,7 +59,7 @@
 	}
 </script>
 
-<div class="mx-auto mt-5 bg-neutral rounded-box max-w-4xl py-12 ease-in duration-200 mb-28">
+<div class="mx-auto mt-5 bg-neutral rounded-box max-w-4xl py-12 ease-in duration-200 mb-28 shadow-xl">
 	<div class="prose mx-auto mb-10">
 		<h1 class="text-center text-xl">Create Job Post</h1>
 	</div>

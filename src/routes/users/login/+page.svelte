@@ -42,9 +42,9 @@
 	}
 </script>
 
-<div class="mx-auto my-3 bg-neutral rounded-box max-w-lg py-20 ease-in duration-200">
+<div class="mx-auto my-3 bg-neutral rounded-box max-w-lg py-20 ease-in duration-200 shadow-2xl">
 	<div class="prose mx-auto">
-		<h1 class="text-center text-xl">Login your account</h1>
+		<h1 class="text-center text-xl ">Login your account</h1>
 	</div>
 	{#if sayHello}
 		<h2 class="text-center text-md">Hi {name}</h2>
