@@ -124,7 +124,7 @@
 	</nav>
 	{#if $showWarning}
 		<div
-			class="fixed inset-x-0.5 container alert alert-warning shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
+			class="sm:fixed inset-x-0.5 container alert alert-warning shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@
 	{/if}
 	{#if $successWarning}
 		<div
-			class="fixed inset-x-0.5 container alert alert-success shadow-lg max-w-xs mx-auto mb-2 rounded-box flex justify-center animate-bounce"
+			class="sm:fixed inset-x-0.5 z-10 container alert alert-success shadow-lg max-w-xs mx-auto mb-2 rounded-box flex justify-center animate-bounce"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
