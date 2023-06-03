@@ -36,10 +36,9 @@
 		isChecked = !isChecked;
 	}
 	toggleCheckboxes();
-
 </script>
 
-<header class=" sticky top-0 z-10 bg-current ">
+<header class=" sticky top-0 z-10 bg-current">
 	<nav class="sm:px-10 mb-10 navbar flex flex-row justify-between items-center shadow-lg">
 		<!--sm: meaning breakpoint starting from 640px and above-->
 		<a
@@ -65,7 +64,8 @@
 			</div>
 		</a>
 
-		<div class="sm:hidden"> <!--display in small screen-->
+		<div class="sm:hidden">
+			<!--display in small screen-->
 			<label class="swap swap-rotate btn btn-ghost btn-md">
 				<input
 					type="checkbox"
@@ -112,7 +112,7 @@
 					>
 				{/if}
 			</label>
-			<details class="dropdown dropdown-bottom dropdown-end z-0">
+			<details class="dropdown dropdown-bottom dropdown-end">
 				<summary class="p-2 btn btn-ghost btn-md">
 					<svg
 						class="swap-off fill-current"
@@ -123,17 +123,19 @@
 						><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg
 					>
 				</summary>
-				<ul class="mt-2 pb-5 shadow menu dropdown-content rounded-box bg-primary w-[360px] shadow-lg">
+				<ul
+					class="mt-2 pb-5 shadow menu dropdown-content rounded-box bg-primary w-[360px] shadow-lg"
+				>
 					{#if $isLoggedInStore}
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<h1 on:touchend={postJob} class="btn btn-secondary m-3 mt-7 text-sm">Post Job</h1>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<h1 on:touchend={logOutB} class="btn btn-secondary m-3 text-sm">Log Out</h1>
-				{:else}
-					<h1 class="btn btn-secondary m-3 mt-7 text-sm" on:touchend={signUp}>Post Job</h1>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<h1 class="btn btn-secondary m-3 text-sm" on:touchend={logIn}>Login</h1>
-				{/if}
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<h1 on:touchend={postJob} class="btn btn-secondary m-3 mt-7 text-sm">Post Job</h1>
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<h1 on:touchend={logOutB} class="btn btn-secondary m-3 text-sm">Log Out</h1>
+					{:else}
+						<h1 class="btn btn-secondary m-3 mt-7 text-sm" on:touchend={signUp}>Post Job</h1>
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<h1 class="btn btn-secondary m-3 text-sm" on:touchend={logIn}>Login</h1>
+					{/if}
 				</ul>
 			</details>
 		</div>
@@ -236,3 +238,9 @@
 		</div>
 	{/if}
 </header>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+</style>
