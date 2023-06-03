@@ -35,22 +35,25 @@
 	}
 	function calDate() {
 		const creationDate = new Date(data.job.created);
-		console.log(creationDate)
+		console.log(creationDate);
 		const currentDate = new Date();
-		console.log(currentDate)
+		console.log(currentDate);
 		const timeDiff = currentDate - creationDate; //returns miliseconds
-		console.log(timeDiff)
+		console.log(timeDiff);
 
 		let timeElapsed;
-		if (timeDiff >= 86400000) { //a day 24hrs in miliseconds 		
+		if (timeDiff >= 86400000) {
+			//a day 24hrs in miliseconds
 			// If more than 24 hours have passed, display the number of days
-			const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));//24 hours * 60 minutes * 60 seconds * 1000 milliseconds = 86400000 milliseconds
+			const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); //24 hours * 60 minutes * 60 seconds * 1000 milliseconds = 86400000 milliseconds
 			timeElapsed = `${daysDiff} day ago`;
-		} else if (timeDiff >= 3600000) { //convert 60mins to miliseconds
+		} else if (timeDiff >= 3600000) {
+			//convert 60mins to miliseconds
 			// If more than 1 hour has passed, display the number of hours
 			const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
 			timeElapsed = `${hoursDiff} hours ago`;
-		} else if (timeDiff >= 60000) { //convert 60sec to miliseconds
+		} else if (timeDiff >= 60000) {
+			//convert 60sec to miliseconds
 			// If more than 1 minute has passed, display the number of minutes
 			const minutesDiff = Math.floor(timeDiff / (1000 * 60));
 			timeElapsed = `${minutesDiff} ago`;
@@ -74,8 +77,9 @@
 			<h1 class="text-3xl font-extrabold text-accent" for="title">{data.job.title}</h1>
 			<p class="text-xl stat-value" for="employer">{data.job.employer}</p>
 		</div>
-		{#if getUserId() === data.job.user}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="flex">
+			{#if getUserId() === data.job.user}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="btn btn-ghost hover:text-sky-400" on:click={postEdit}>
 					<svg
 						viewBox="0 3 30 30"
@@ -132,9 +136,10 @@
 						</div>
 					</div>
 				</div>
-		{:else}
-			<i class="" />
-		{/if}
+			{:else}
+				<i class="" />
+			{/if}
+		</div>
 	</div>
 
 	<div class="flex flex-col sm:flex-row w-full mt-8">

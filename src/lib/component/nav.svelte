@@ -242,5 +242,6 @@
 <style>
 	details summary::-webkit-details-marker {
 		display: none;
-	}
+	} 
+	/* to remove the details default arrow */
 </style>
