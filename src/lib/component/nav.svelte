@@ -5,6 +5,7 @@
 	import { themeChange } from 'theme-change';
 	import { goto } from '$app/navigation';
 	import { statusSpinner } from '../component/spinner.js';
+	import { darktheme } from '../component/nav.js'
 
 	onMount(() => {
 		themeChange(false);
@@ -28,17 +29,6 @@
 		goto('/users/new/');
 	}
 
-	let darktheme = null;
-
-	if (
-		localStorage.getItem('theme') === 'dracula' &&
-		window.matchMedia('(prefers-color-scheme: dark)').matches
-	) {
-		darktheme = true;
-	} else {
-		darktheme = false;
-	}
-
 	let isChecked = false;
 
 	(toggleCheckboxes) => {
@@ -47,9 +37,15 @@
 </script>
 
 <header class="mx-10 mt-5">
-	<nav class="navbar flex flex-col sm:flex-row justify-between items-center"> <!--sm: meaning breakpoint starting from 640px and above-->
-		<a href="/" on:click={()=>{showWarning.set(false);}}>
-		<div class="prose btn btn-ghost">		
+	<nav class="navbar flex flex-col sm:flex-row justify-between items-center">
+		<!--sm: meaning breakpoint starting from 640px and above-->
+		<a
+			href="/"
+			on:click={() => {
+				showWarning.set(false);
+			}}
+		>
+			<div class="prose btn btn-ghost">
 				<label class="swap swap-flip text-2xl mr-2">
 					<!-- this hidden checkbox controls the state -->
 					<input type="checkbox" class="hidden" bind:checked={isChecked} disabled />
@@ -58,14 +54,14 @@
 						<!-- by default checkbox is off once refreshed-->
 						<div class="swap-off">😈</div>
 					{:else}
-						<div class="swap-off">🐝</div>
 						<div class="swap-on">😈</div>
+						<div class="swap-off">🐝</div>
 					{/if}
 				</label>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<h1 class=" normal-case text-xl prose text-primary">NEXT-JOBS</h1>
-		</div>
-	</a>
+			</div>
+		</a>
 		<div class="prose">
 			<label class="swap swap-rotate btn btn-ghost btn-md">
 				<input
@@ -78,7 +74,7 @@
 				{#if darktheme}
 					<!-- by default checkbox is off once refreshed-->
 					<svg
-						class="swap-off  fill-current w-5 h-5 text-secondary"
+						class="swap-off fill-current w-5 h-5 text-secondary"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
 						><path
