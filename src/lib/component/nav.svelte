@@ -112,7 +112,7 @@
 					>
 				{/if}
 			</label>
-			<details class="dropdown dropdown-bottom dropdown-end hidden">
+			<details class="dropdown dropdown-bottom dropdown-end z-0">
 				<summary class="p-2 btn btn-ghost btn-md">
 					<svg
 						class="swap-off fill-current"
