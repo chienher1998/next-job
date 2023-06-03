@@ -6,7 +6,6 @@
 	import { getUserId } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
 	import { deleteAlert } from '../../../utils/alert.js';
-	import { darktheme } from '../../../lib/component/nav.js';
 	export let data;
 
 	function goSeeJob() {
@@ -72,15 +71,15 @@
 	<link href="./../node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
 </head>
 
-<div class="sm:relative container my-10 mx-auto max-w-7xl">
+<div class="container my-10 mx-auto max-w-7xl">
 	<div
-		class="flex flex-col items-center sm:flex-row rounded-box bg-gradient-to-r from-secondary to-primary h-[140px] w-full"
+		class="flex flex-col items-center sm:flex-row rounded-box bg-gradient-to-r from-secondary to-primary w-full"
 	>
-		<div class="sm:flex-1 sm:ml-8 text-center sm:text-start max-w-xs">
-			<h1 class="mt-4 sm:mt-0 text-3xl font-extrabold" for="title">{data.job.title}</h1>
-			<p class="text-xl stat-value " for="employer">{data.job.employer}</p>
+		<div class="sm:flex-1 sm:ml-8 text-center sm:text-start max-w-md p-5">
+			<h1 class=" sm:mt-0 text-3xl font-extrabold" for="title">{data.job.title}</h1>
+			<p class="text-xl stat-value" for="employer">{data.job.employer}</p>
 		</div>
-		<div class="flex">
+		<div class="flex mb-5 ">
 			{#if getUserId() === data.job.user}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="btn btn-ghost hover:text-sky-400" on:click={postEdit}>
