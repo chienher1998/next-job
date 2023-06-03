@@ -6,6 +6,7 @@
 	import { getUserId } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
 	import { deleteAlert } from '../../../utils/alert.js';
+	import { darktheme } from '../../../lib/component/nav.js';
 	export let data;
 
 	function goSeeJob() {
@@ -72,10 +73,12 @@
 </head>
 
 <div class="sm:relative container my-10 mx-auto max-w-7xl">
-	<div class="flex flex-col items-center sm:flex-row">
-		<div class="sm:flex-1 sm:ml-3 text-center sm:text-start max-w-xs">
-			<h1 class="text-3xl font-extrabold text-accent" for="title">{data.job.title}</h1>
-			<p class="text-xl stat-value" for="employer">{data.job.employer}</p>
+	<div
+		class="flex flex-col items-center sm:flex-row rounded-box bg-gradient-to-r from-secondary to-primary h-[140px] w-full"
+	>
+		<div class="sm:flex-1 sm:ml-8 text-center sm:text-start max-w-xs">
+			<h1 class="mt-4 sm:mt-0 text-3xl font-extrabold" for="title">{data.job.title}</h1>
+			<p class="text-xl stat-value " for="employer">{data.job.employer}</p>
 		</div>
 		<div class="flex">
 			{#if getUserId() === data.job.user}
@@ -144,7 +147,7 @@
 
 	<div class="flex flex-col sm:flex-row w-full mt-8">
 		<div
-			class="mb-5 basis-2/3 prose max-w-none w-full bg-neutral rounded-box p-8 ease-in duration-200"
+			class="mb-5 basis-4/5 prose max-w-none w-full bg-neutral rounded-box p-8 ease-in duration-200"
 		>
 			<h2 class="text-xl stat-value">Description</h2>
 			<SvelteMarkdown source={data.job.description} />
@@ -156,7 +159,7 @@
 			<p>{data.job.applicationInstructions}</p>
 		</div>
 		<div
-			class="sm:sticky top-28 basis-1/5 sm:ml-5 bg-neutral p-5 rounded-box max-h-72 ease-in duration-200"
+			class="sm:sticky top-28 basis-1/5 sm:ml-10 bg-neutral p-5 rounded-box max-h-72 ease-in duration-200"
 		>
 			<h2 class="text-lg stat-value">Location</h2>
 			<p class="stat-title">{data.job.location}</p>
@@ -167,8 +170,8 @@
 				)}
 			</p>
 			<p class="stat-desc">USD per annum</p>
-			<h2 class="mt-6 text-lg stat-value">Created</h2>
-			<p class="stat-title">{calDate()}</p>
+			<h2 class="mt-6 text-lg stat-title">Posted</h2>
+			<p class="stat-desc">{calDate()}</p>
 		</div>
 	</div>
 </div>

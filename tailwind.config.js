@@ -17,6 +17,9 @@ module.exports = {
 					 //custom color for job title
 					 header: {
 						background :'#282A36'
+					 },
+					 main:{
+						background: 'gradient-to-r from-violet-900 to-fuchsia-900'
 					 }
 				}
 			},
