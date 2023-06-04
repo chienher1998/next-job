@@ -17,16 +17,13 @@
 	}
 
 	async function deleteJob() {
-		const resp = await fetch(
-			PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`,
-			{
-				method: 'DELETE',
-				mode: 'cors',
-				headers: {
-					Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
-				}
+		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`, {
+			method: 'DELETE',
+			mode: 'cors',
+			headers: {
+				Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
 			}
-		);
+		});
 		if (resp.status == 200) {
 			goSeeJob();
 		} else {
@@ -56,11 +53,11 @@
 			//convert 60sec to miliseconds
 			// If more than 1 minute has passed, display the number of minutes
 			const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-			timeElapsed = `${minutesDiff} ago`;
+			timeElapsed = `${minutesDiff} miniutes ago`;
 		} else {
 			// Display the number of seconds
 			const secondsDiff = Math.floor(timeDiff / 1000);
-			timeElapsed = `${secondsDiff}`;
+			timeElapsed = `${secondsDiff} seconds ago `;
 		}
 
 		return timeElapsed;
@@ -73,13 +70,13 @@
 
 <div class="container my-10 mx-auto max-w-7xl">
 	<div
-		class="flex flex-col items-center sm:flex-row rounded-box bg-gradient-to-r from-secondary to-primary w-full"
+		class="flex flex-col items-center sm:flex-row rounded-box bg-gradient-to-r from-secondary to-primary w-full p-5"
 	>
-		<div class="sm:flex-1 sm:ml-8 text-center sm:text-start max-w-md p-5">
+		<div class="sm:flex-1 sm:ml-2 text-center sm:text-start">
 			<h1 class=" sm:mt-0 text-3xl font-extrabold" for="title">{data.job.title}</h1>
 			<p class="text-xl stat-value" for="employer">{data.job.employer}</p>
 		</div>
-		<div class="flex mb-5 ">
+		<div class="flex mt-5 sm:m-10">
 			{#if getUserId() === data.job.user}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="btn btn-ghost hover:text-sky-400" on:click={postEdit}>
@@ -132,7 +129,7 @@
 						<div class="modal-action">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<!-- svelte-ignore a11y-missing-attribute -->
-							<a class="btn btn-primary" on:mousedown={deleteJob} on:mouseup={goSeeJob}>Confirm</a>
+							<button class="btn btn-primary" on:mousedown={deleteJob} on:mouseup={goSeeJob}>Confirm</button>
 							<!-- svelte-ignore a11y-invalid-attribute -->
 							<a href="#" class="btn btn-primary">Cancel</a>
 						</div>
