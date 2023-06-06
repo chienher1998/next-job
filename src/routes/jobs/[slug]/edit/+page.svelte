@@ -9,6 +9,7 @@
 	let formErrors = {};
 
 	if (getUserId() != data.job.user) {
+		alert("Please Login First")
 		goto('../../../users/login');
 	}
 

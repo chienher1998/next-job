@@ -9,6 +9,7 @@
 	let formErrors = {};
 
 	if ($isLoggedInStore != true) {
+		alert("Please Login First")
 		goto('../../users/login');
 	}
 
