@@ -9,7 +9,6 @@
 	let formErrors = {};
 
 	if ($isLoggedInStore != true) {
-		alert('Please login first');
 		goto('../../users/login');
 	}
 
@@ -54,10 +53,10 @@
 
 		if (resp.status == 200) {
 			statusSpinner.set(false);
-			displayAlert('Job Posted Successfully !', 'success');
+			displayAlert('Job Posted Successfully !', 'alert-success');
 			goSeeJob();
 		} else {
-			displayAlert('Failed to post job !', 'warning');
+			displayAlert('Failed to post job !', 'alert-warning');
 			statusSpinner.set(false);
 		}
 	}

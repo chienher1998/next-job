@@ -1,5 +1,5 @@
 <script>
-	import { authenticateUser, isLoggedInStore } from '../../../utils/auth.js';
+	import { authenticateUser} from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
 	import { displayAlert} from '../../../utils/alert.js';
 	import Spinner from '../../../lib/component/spinner.svelte';
@@ -21,11 +21,11 @@
 		if (res.success) {
 			statusSpinner.set(false);
 			goto('/');
-			displayAlert('Login Successful !', 'success');
+			displayAlert('Login Successful !','alert-success');
 		} else {
 			msg = 'Login';
 			statusSpinner.set(false);
-			displayAlert('Check Username / Password !', 'warning');
+			displayAlert('Check Username / Password !','alert-warning');
 		}
 	}
 

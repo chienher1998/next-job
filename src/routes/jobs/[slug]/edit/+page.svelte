@@ -10,7 +10,6 @@
 
 	if (getUserId() != data.job.user) {
 		goto('../../../users/login');
-		alert('Please Log In First');
 	}
 
 	function goSeeJob() {
@@ -60,11 +59,11 @@
 		);
 		if (resp.status == 200) {
 			statusSpinner.set(false);
-			displayAlert('Job has been editted', 'success')
+			displayAlert('Job has been editted', 'alert-success')
 			goSeeJob();
 		} else {
 			statusSpinner.set(false);
-			displayAlert('Check highlighted field', 'warning')
+			displayAlert('Check highlighted field', 'alert-warning')
 			showEditAlert();
 		}
 	}

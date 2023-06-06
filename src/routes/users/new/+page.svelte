@@ -5,17 +5,12 @@
 	import { displayAlert } from '../../../utils/alert.js';
 	import Spinner from '../../../lib/component/spinner.svelte';
 	import { statusSpinner } from '../../../lib/component/spinner.js';
-	
 
-	let msg = "CREATE AN ACCOUNT";
+	let msg = 'CREATE AN ACCOUNT';
 	let formErrors = {};
 
-	function postSignUp() {
-		goto('/jobs/new');
-	}
-
 	async function createUser(evt) {
-		msg = "CREATING"
+		msg = 'CREATING';
 		statusSpinner.set(true);
 		evt.preventDefault();
 
@@ -45,12 +40,12 @@
 			const res = await authenticateUser(userData.username, userData.password);
 
 			if (res.success) {
-				showWarning.set(false)
 				statusSpinner.set(false);
-				postSignUp();
+				goto('/jobs/new');
+				displayAlert('Sign Up Successful !', 'alert-success');
 			} else {
 				statusSpinner.set(false);
-				throw 'Sign up succeeded but authentication failed';
+				displayAlert('Sign up succeeded but authentication failed', 'alert-warning');
 			}
 		} else {
 			statusSpinner.set(false);
@@ -65,13 +60,11 @@
 </svelte:head>
 
 <div class="mx-auto my-10 bg-neutral rounded-box max-w-lg py-10 ease-in duration-200 shadow-2xl">
-	<div class="prose mx-auto text-center ">
+	<div class="prose mx-auto text-center">
 		<h1 class=" text-xl">Create an Account to Post a Job</h1>
-			<a
-				class="link-hover italic text-xs"
-				href="../../users/login"
-				>Already have an account? Click here to login instead.</a
-			>
+		<a class="link-hover italic text-xs" href="../../users/login"
+			>Already have an account? Click here to login instead.</a
+		>
 	</div>
 	<div class="flex justify-center items-center mt-8">
 		<form on:submit={createUser} class="w-full mx-10">
@@ -147,10 +140,8 @@
 			</div>
 
 			<div class="form-control w-full mt-10">
-				<button class="btn btn-md btn-primary"><Spinner/>Create an Account</button>
+				<button class="btn btn-md btn-primary"><Spinner />Create an Account</button>
 			</div>
 		</form>
 	</div>
 </div>
-
-

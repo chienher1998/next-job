@@ -28,8 +28,8 @@
 	}
 
 	function signUp() {
-		displayAlert('Please Sign Up First !', 'warning');
 		goto('/users/new/');
+		displayAlert('Please Sign Up First !', 'alert-warning');
 	}
 
 	let isChecked = false;
@@ -129,7 +129,8 @@
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<h1 on:touchend={logOutB} class="btn btn-secondary m-3 text-sm">Log Out</h1>
 					{:else}
-						<h1 class="btn btn-secondary m-3 mt-7 text-sm" on:touchend={signUp}>Post Job</h1>
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<h1 class="btn btn-secondary m-3 mt-7 text-sm" on:click={signUp}>Post Job</h1>
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<h1 class="btn btn-secondary m-3 text-sm" on:click={logIn}>Login</h1>
 					{/if}
@@ -198,7 +199,7 @@
 	</nav>
 	{#if $alertMessage}
 		<div
-			class="fixed alert alert-{$alertType} top-[110px] inset-x-0.5 z-10 container shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
+			class="alert {$alertType} fixed top-[110px] inset-x-0.5 z-10 container shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

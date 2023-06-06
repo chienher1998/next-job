@@ -8,10 +8,6 @@
 	import { displayAlert } from '../../../utils/alert.js';
 	export let data;
 
-	function goSeeJob() {
-		goto('/');
-		displayAlert('Job has been deleted', 'success');
-	}
 	function postEdit() {
 		goto(`/jobs/${data.job.id}/edit`);
 	}
@@ -28,9 +24,10 @@
 			}
 		);
 		if (resp.status == 204) {
-			goSeeJob();
+			goto('/');
+			displayAlert('Job has been deleted', 'alert-success');
 		} else {
-			throw 'cant delete job';
+			displayAlert('Job has been deleted', 'alert-warning');
 		}
 	}
 	function calDate() {
