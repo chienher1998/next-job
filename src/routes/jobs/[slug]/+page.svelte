@@ -24,8 +24,8 @@
 				Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
 			}
 		});
-		if (resp.status == 200) {
-			goSeeJob();
+		if (resp.status == 204) {
+			goSeeJob()
 		} else {
 			throw 'cant delete job';
 		}
@@ -64,9 +64,6 @@
 	}
 </script>
 
-<head>
-	<link href="./../node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
-</head>
 
 <div class="container my-10 mx-auto max-w-7xl">
 	<div
@@ -129,7 +126,7 @@
 						<div class="modal-action">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<!-- svelte-ignore a11y-missing-attribute -->
-							<button class="btn btn-primary" on:mousedown={deleteJob} on:mouseup={goSeeJob}>Confirm</button>
+							<button class="btn btn-primary" on:click={deleteJob} >Confirm</button>
 							<!-- svelte-ignore a11y-invalid-attribute -->
 							<a href="#" class="btn btn-primary">Cancel</a>
 						</div>

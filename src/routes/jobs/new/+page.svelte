@@ -1,15 +1,21 @@
 <script>
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
-	import { getUserId } from '../../../utils/auth.js';
+	import { getUserId, isLoggedInStore } from '../../../utils/auth.js';
 	import { showJobAlert, showWarning, createJobAlert } from '../../../utils/alert.js';
 	import { statusSpinner } from '$lib/component/spinner.js';
 	import Spinner from '$lib/component/spinner.svelte';
+
 	let formErrors = {};
+
+	if (isLoggedInStore != false) {
+		alert('Please login first');
+		goto('../../users/login');
+	}
 
 	function goSeeJob() {
 		goto('/');
-		createJobAlert()
+		createJobAlert();
 	}
 
 	async function createJob(evt) {
@@ -25,7 +31,6 @@
 		if (evt.target['appinstruction'].value.length < 10) {
 			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
 		}
-
 
 		const userId = getUserId();
 		const jobData = {
@@ -59,7 +64,9 @@
 	}
 </script>
 
-<div class="mx-auto mt-5 bg-neutral rounded-box max-w-4xl py-12 ease-in duration-200 mb-28 shadow-xl">
+<div
+	class="mx-auto mt-5 bg-neutral rounded-box max-w-4xl py-12 ease-in duration-200 mb-28 shadow-xl"
+>
 	<div class="prose mx-auto mb-10">
 		<h1 class="text-center text-xl">Create Job Post</h1>
 	</div>

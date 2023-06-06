@@ -29,6 +29,7 @@ export function getTokenFromLocalStorage() {
 	return null;
 }
 
+
 export async function isLoggedIn() {
 	if (!getTokenFromLocalStorage()) {
 		return false;

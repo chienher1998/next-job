@@ -6,8 +6,6 @@
 	import { goto } from '$app/navigation';
 	import { statusSpinner } from '../component/spinner.js';
 	import { darktheme } from '../component/nav.js';
-	import { writable } from 'svelte/store';
-	writable;
 	onMount(() => {
 		themeChange(false);
 	});

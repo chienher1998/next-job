@@ -8,6 +8,11 @@
 	let formErrors = {};
 	export let data;
 
+	if(getUserId() != data.job.user){
+		alert('Please Log In')
+		goto('../../../users/login')
+	}
+
 	function goSeeJob() {
 		goto(`/jobs/${data.job.id}`);
 	}
