@@ -9,8 +9,8 @@
 	let formErrors = {};
 
 	if (isLoggedInStore != false) {
-		alert('Please login first');
 		goto('../../users/login');
+		alert('Please login first');
 	}
 
 	function goSeeJob() {

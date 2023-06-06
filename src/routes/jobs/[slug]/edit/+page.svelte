@@ -9,8 +9,8 @@
 	export let data;
 
 	if(getUserId() != data.job.user){
-		alert('Please Log In')
 		goto('../../../users/login')
+		alert('Please Log In')
 	}
 
 	function goSeeJob() {
