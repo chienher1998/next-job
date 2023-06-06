@@ -5,27 +5,30 @@
 	import { getTokenFromLocalStorage } from '../../../utils/auth.js';
 	import { getUserId } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
-	import { deleteAlert } from '../../../utils/alert.js';
+	import { displayAlert } from '../../../utils/alert.js';
 	export let data;
 
 	function goSeeJob() {
 		goto('/');
-		deleteAlert();
+		displayAlert('Job has been deleted', 'success');
 	}
 	function postEdit() {
 		goto(`/jobs/${data.job.id}/edit`);
 	}
 
 	async function deleteJob() {
-		const resp = await fetch(PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`, {
-			method: 'DELETE',
-			mode: 'cors',
-			headers: {
-				Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
+		const resp = await fetch(
+			PUBLIC_BACKEND_BASE_URL + `/api/collections/jobs/records/${data.job.id}`,
+			{
+				method: 'DELETE',
+				mode: 'cors',
+				headers: {
+					Authorization: getTokenFromLocalStorage() // token given by backend server, to auth the user is logged in
+				}
 			}
-		});
+		);
 		if (resp.status == 204) {
-			goSeeJob()
+			goSeeJob();
 		} else {
 			throw 'cant delete job';
 		}
@@ -64,6 +67,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Next-Jobs | {data.job.title}</title>
+</svelte:head>
 
 <div class="container my-10 mx-auto max-w-7xl">
 	<div
@@ -126,7 +132,7 @@
 						<div class="modal-action">
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<!-- svelte-ignore a11y-missing-attribute -->
-							<button class="btn btn-primary" on:click={deleteJob} >Confirm</button>
+							<button class="btn btn-primary" on:click={deleteJob}>Confirm</button>
 							<!-- svelte-ignore a11y-invalid-attribute -->
 							<a href="#" class="btn btn-primary">Cancel</a>
 						</div>

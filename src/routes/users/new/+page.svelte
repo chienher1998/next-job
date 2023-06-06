@@ -2,7 +2,7 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { authenticateUser } from './../../../utils/auth.js';
-	import { showLoginAlert, showWarning } from '../../../utils/alert.js';
+	import { displayAlert } from '../../../utils/alert.js';
 	import Spinner from '../../../lib/component/spinner.svelte';
 	import { statusSpinner } from '../../../lib/component/spinner.js';
 	
@@ -50,7 +50,6 @@
 				postSignUp();
 			} else {
 				statusSpinner.set(false);
-				showLoginAlert()
 				throw 'Sign up succeeded but authentication failed';
 			}
 		} else {
@@ -61,13 +60,16 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Next-Jobs | Sign Up</title>
+</svelte:head>
+
 <div class="mx-auto my-10 bg-neutral rounded-box max-w-lg py-10 ease-in duration-200 shadow-2xl">
 	<div class="prose mx-auto text-center ">
 		<h1 class=" text-xl">Create an Account to Post a Job</h1>
 			<a
 				class="link-hover italic text-xs"
 				href="../../users/login"
-				on:click={() => showWarning.set(false)}
 				>Already have an account? Click here to login instead.</a
 			>
 	</div>
