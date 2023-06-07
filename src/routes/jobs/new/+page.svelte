@@ -8,7 +8,7 @@
 
 	let formErrors = {};
 
-	if (isLoggedInStore != false) {
+	if ($isLoggedInStore != false) {
 		goto('../../users/login');
 	}
 
