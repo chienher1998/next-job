@@ -60,6 +60,9 @@
 		}
 	}
 </script>
+<svelte:head>
+	<title>Next Jobs | Sign Up</title>
+</svelte:head>
 
 <div class="mx-auto my-10 bg-neutral rounded-box max-w-lg py-10 ease-in duration-200 shadow-2xl">
 	<div class="prose mx-auto text-center ">

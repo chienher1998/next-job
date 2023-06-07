@@ -64,6 +64,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Next Jobs | {data.job.title}</title>
+</svelte:head>
 
 <div class="container my-10 mx-auto max-w-7xl">
 	<div

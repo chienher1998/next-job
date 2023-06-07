@@ -2,6 +2,9 @@
 	export let data;
 	import humanize from 'humanize-plus';
 </script>
+<svelte:head>
+	<title>Next Jobs | Home Page</title>
+</svelte:head>
 
 <div class="container mx-auto">
 	<div class="prose text-center mx-auto">

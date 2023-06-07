@@ -66,7 +66,9 @@
 		}
 	}
 </script>
-
+<svelte:head>
+	<title>Next Jobs | Edit Job</title>
+</svelte:head>
 <div class="mx-10 my-3">
 	<div class="flex justify-center items-center mt-8">
 		<form on:submit={editJob} class="w-3/4">

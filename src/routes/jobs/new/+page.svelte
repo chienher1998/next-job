@@ -63,7 +63,9 @@
 		}
 	}
 </script>
-
+<svelte:head>
+	<title>Next Jobs | Post Job</title>
+</svelte:head>
 <div
 	class="mx-auto mt-5 bg-neutral rounded-box max-w-4xl py-12 ease-in duration-200 mb-28 shadow-xl"
 >
