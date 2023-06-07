@@ -25,9 +25,9 @@
 		);
 		if (resp.status == 204) {
 			goto('/');
-			displayAlert('Job has been deleted', 'success');
+			displayAlert('Job has been deleted', 'alert-success');
 		} else {
-			displayAlert('Job has been deleted', 'warning');
+			displayAlert('Job has been deleted', 'alert-warning');
 		}
 	}
 	function calDate() {
