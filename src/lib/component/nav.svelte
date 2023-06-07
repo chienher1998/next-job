@@ -29,7 +29,7 @@
 
 	function signUp() {
 		goto('/users/new/');
-		displayAlert('Please Sign Up First !', 'alert-warning');
+		displayAlert('Please Sign Up First !', 'warning');
 	}
 
 	let isChecked = false;
@@ -199,7 +199,7 @@
 	</nav>
 	{#if $alertMessage}
 		<div
-			class="alert {$alertType} fixed top-[110px] inset-x-0.5 z-10 container shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
+			class="alert alert-{$alertType} fixed top-[110px] inset-x-0.5 z-10 container shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

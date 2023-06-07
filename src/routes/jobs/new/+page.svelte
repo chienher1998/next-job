@@ -54,10 +54,10 @@
 
 		if (resp.status == 200) {
 			statusSpinner.set(false);
-			displayAlert('Job Posted Successfully !', 'alert-success');
+			displayAlert('Job Posted Successfully !', 'success');
 			goSeeJob();
 		} else {
-			displayAlert('Failed to post job !', 'alert-warning');
+			displayAlert('Failed to post job !', 'warning');
 			statusSpinner.set(false);
 		}
 	}

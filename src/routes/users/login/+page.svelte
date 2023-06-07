@@ -21,11 +21,11 @@
 		if (res.success) {
 			statusSpinner.set(false);
 			goto('/');
-			displayAlert('Login Successful !','alert-success');
+			displayAlert('Login Successful !','success');
 		} else {
 			msg = 'Login';
 			statusSpinner.set(false);
-			displayAlert('Check Username / Password !','alert-warning');
+			displayAlert('Check Username / Password !','warning');
 		}
 	}
 

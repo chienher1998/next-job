@@ -42,10 +42,10 @@
 			if (res.success) {
 				statusSpinner.set(false);
 				goto('/jobs/new');
-				displayAlert('Sign Up Successful !', 'alert-success');
+				displayAlert('Sign Up Successful !', 'success');
 			} else {
 				statusSpinner.set(false);
-				displayAlert('Sign up succeeded but authentication failed', 'alert-warning');
+				displayAlert('Sign up succeeded but authentication failed', 'warning');
 			}
 		} else {
 			statusSpinner.set(false);
