@@ -2,19 +2,20 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getUserId, isLoggedInStore } from '../../../utils/auth.js';
-	import { displayAlert } from '../../../utils/alert.js';
+	import { showJobAlert, showWarning, createJobAlert } from '../../../utils/alert.js';
 	import { statusSpinner } from '$lib/component/spinner.js';
 	import Spinner from '$lib/component/spinner.svelte';
 
 	let formErrors = {};
 
-	if ($isLoggedInStore != true) {
-		alert("Please Login First")
+	if (isLoggedInStore != false) {
+		alert('Please login first');
 		goto('../../users/login');
 	}
 
 	function goSeeJob() {
 		goto('/');
+		createJobAlert();
 	}
 
 	async function createJob(evt) {
@@ -54,19 +55,14 @@
 
 		if (resp.status == 200) {
 			statusSpinner.set(false);
-			displayAlert('Job Posted Successfully !', 'alert-success');
+			showWarning.set(false);
 			goSeeJob();
 		} else {
-			displayAlert('Failed to post job !', 'alert-warning');
 			statusSpinner.set(false);
+			showJobAlert();
 		}
 	}
 </script>
-
-<svelte:head>
-	<title>Next-Jobs | Post Job</title>
-</svelte:head>
-
 
 <div
 	class="mx-auto mt-5 bg-neutral rounded-box max-w-4xl py-12 ease-in duration-200 mb-28 shadow-xl"

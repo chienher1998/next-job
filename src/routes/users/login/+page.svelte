@@ -1,16 +1,20 @@
 <script>
-	import { authenticateUser} from '../../../utils/auth.js';
+	import { authenticateUser } from '../../../utils/auth.js';
 	import { goto } from '$app/navigation';
-	import { displayAlert} from '../../../utils/alert.js';
+	import { showLoginAlert, showWarning, loginSucAlert } from '../../../utils/alert.js';
 	import Spinner from '../../../lib/component/spinner.svelte';
 	import { statusSpinner } from '../../../lib/component/spinner.js';
 
 	let formErrors = {};
-	let msg = 'Login';
+	let msg = "Login";
 
+	function postLogIn() {
+		goto('/');
+		loginSucAlert()
+	}
 	async function logInUser(evt) {
 		statusSpinner.set(true);
-		msg = 'Logging In';
+		msg = "Logging In";
 		evt.preventDefault();
 		const userData = {
 			username: evt.target['username'].value,
@@ -20,12 +24,12 @@
 
 		if (res.success) {
 			statusSpinner.set(false);
-			goto('/');
-			displayAlert('Login Successful !','alert-success');
+			showWarning.set(false);
+			postLogIn();
 		} else {
-			msg = 'Login';
+			msg = "Login";
 			statusSpinner.set(false);
-			displayAlert('Check Username / Password !','alert-warning');
+			showLoginAlert();
 		}
 	}
 
@@ -38,13 +42,9 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Next-Jobs | Login</title>
-</svelte:head>
-
 <div class="mx-auto my-3 bg-neutral rounded-box max-w-lg py-20 ease-in duration-200 shadow-2xl">
 	<div class="prose mx-auto">
-		<h1 class="text-center text-xl">Login your account</h1>
+		<h1 class="text-center text-xl ">Login your account</h1>
 	</div>
 	{#if sayHello}
 		<h2 class="text-center text-md">Hi {name}</h2>

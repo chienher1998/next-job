@@ -2,15 +2,15 @@
 	import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getUserId, getTokenFromLocalStorage } from './../../../../utils/auth.js';
-	import { statusSpinner } from '../../../../lib/component/spinner.js';
-	import Spinner from '../../../../lib/component/spinner.svelte';
-	import { displayAlert } from '../../../../utils/alert.js';
-	export let data;
+	import {statusSpinner} from '../../../../lib/component/spinner.js'
+	import Spinner from '../../../../lib/component/spinner.svelte'
+	import {showEditAlert, showWarning} from '../../../../utils/alert.js'
 	let formErrors = {};
+	export let data;
 
-	if (getUserId() != data.job.user) {
-		alert("Please Login First")
-		goto('../../../users/login');
+	if(getUserId() != data.job.user){
+		alert('Please Log In')
+		goto('../../../users/login')
 	}
 
 	function goSeeJob() {
@@ -18,12 +18,9 @@
 	}
 
 	async function editJob(evt) {
-		statusSpinner.set(true);
+		statusSpinner.set(true)
 		evt.preventDefault();
 		formErrors = {}; // reset the formErrors
-		if (evt.target['title'].value.length < 3) {
-			formErrors['title'] = { message: 'Must be more than 3 characters' };
-		}
 		if (evt.target['minAnnualCompensation'].value < 1000) {
 			formErrors['minAnnualCompensation'] = { message: 'Must be larger than 1000.00' };
 		}
@@ -33,6 +30,7 @@
 		if (evt.target['appinstruction'].value.length < 10) {
 			formErrors['appinstruction'] = { message: 'Must have at least 10 characters' };
 		}
+
 
 		const userId = getUserId();
 		const jobData = {
@@ -59,20 +57,15 @@
 			}
 		);
 		if (resp.status == 200) {
-			statusSpinner.set(false);
-			displayAlert('Job has been editted', 'alert-success')
+			showWarning.set(false)
+			statusSpinner.set(false)
 			goSeeJob();
 		} else {
-			statusSpinner.set(false);
-			displayAlert('Check highlighted field', 'alert-warning')
-			showEditAlert();
+			statusSpinner.set(false)
+			showEditAlert()
 		}
 	}
 </script>
-
-<svelte:head>
-	<title>Next-Jobs | Edit Job</title>
-</svelte:head>
 
 <div class="mx-10 my-3">
 	<div class="flex justify-center items-center mt-8">
@@ -220,7 +213,7 @@
 					type="text"
 					name="appinstruction"
 					placeholder=""
-					class="textarea textarea-bordered w-full h-32 textarea-info"
+					class="textarea textarea-bordered w-full h-32 textarea-info "
 					bind:value={data.job.applicationInstructions}
 					required
 				/>
@@ -231,7 +224,7 @@
 				{/if}
 
 				<div class="form-control w-full mt-8 mb-28">
-					<button class="btn btn-md btn-primary"><Spinner />Update</button>
+					<button class="btn btn-md btn-primary"><Spinner/>Update</button>
 				</div>
 			</div>
 		</form>

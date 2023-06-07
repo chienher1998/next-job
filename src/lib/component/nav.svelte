@@ -1,35 +1,31 @@
 <script>
-	import { alertMessage, alertType, displayAlert, Reset } from '../../utils/alert.js';
+	import { warningMsg, showWarning, showAlert, successWarning } from '../../utils/alert.js';
 	import { isLoggedInStore, logOut } from '../../utils/auth.js';
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 	import { goto } from '$app/navigation';
 	import { statusSpinner } from '../component/spinner.js';
 	import { darktheme } from '../component/nav.js';
-
 	onMount(() => {
 		themeChange(false);
 	});
-	function goHome() {
-		goto('/');
-		Reset()
-	}
+
 	function logIn() {
-		Reset()
 		goto('/users/login/');
+		showWarning.set(false);
 	}
 	function logOutB() {
-		statusSpinner.set(false);
 		goto('/');
+		statusSpinner.set(false);
+		successWarning.set(false);
 		logOut();
 	}
 	function postJob() {
 		goto('/jobs/new/');
 	}
-
 	function signUp() {
+		showAlert();
 		goto('/users/new/');
-		displayAlert('Please Sign Up First !', 'alert-warning');
 	}
 
 	let isChecked = false;
@@ -43,7 +39,12 @@
 <header class=" sticky top-0 z-10 bg-current">
 	<nav class="sm:px-10 mb-10 navbar flex flex-row justify-between items-center shadow-lg">
 		<!--sm: meaning breakpoint starting from 640px and above-->
-		<a href="/">
+		<a
+			href="/"
+			on:click={() => {
+				showWarning.set(false);
+			}}
+		>
 			<div class="prose btn btn-ghost">
 				<label class="swap swap-flip text-2xl mr-2">
 					<!-- this hidden checkbox controls the state -->
@@ -57,7 +58,7 @@
 					{/if}
 				</label>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<h1 class=" normal-case text-xl prose text-primary" on:click={goHome}>NEXT-JOBS</h1>
+				<h1 class=" normal-case text-xl prose text-primary">NEXT-JOBS</h1>
 			</div>
 		</a>
 
@@ -129,10 +130,9 @@
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<h1 on:touchend={logOutB} class="btn btn-secondary m-3 text-sm">Log Out</h1>
 					{:else}
+						<h1 class="btn btn-secondary m-3 mt-7 text-sm" on:touchend={signUp}>Post Job</h1>
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<h1 class="btn btn-secondary m-3 mt-7 text-sm" on:click={signUp}>Post Job</h1>
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<h1 class="btn btn-secondary m-3 text-sm" on:click={logIn}>Login</h1>
+						<h1 class="btn btn-secondary m-3 text-sm" on:touchend={logIn}>Login</h1>
 					{/if}
 				</ul>
 			</details>
@@ -197,9 +197,9 @@
 			{/if}
 		</div>
 	</nav>
-	{#if $alertMessage}
+	{#if $showWarning}
 		<div
-			class="alert {$alertType} fixed top-[110px] inset-x-0.5 z-10 container shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
+			class="fixed top-[110px] inset-x-0.5 z-10 container alert alert-warning shadow-lg max-w-sm mx-auto rounded-box flex justify-center animate-bounce"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,26 @@
 					d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 				/></svg
 			>
-			<span class="text-center font-bold">{$alertMessage}</span>
+			<span class="text-center font-bold">{$warningMsg}</span>
+		</div>
+	{/if}
+	{#if $successWarning}
+		<div
+			class="fixed top-[110px] inset-x-0.5 z-10 container alert alert-success shadow-lg max-w-xs mx-auto mb-2 rounded-box flex justify-center animate-bounce"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="stroke-current shrink-0 h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				><path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+				/></svg
+			>
+			<span class="text-center font-bold">{$warningMsg}</span>
 		</div>
 	{/if}
 </header>
@@ -221,6 +240,6 @@
 <style>
 	details summary::-webkit-details-marker {
 		display: none;
-	}
+	} 
 	/* to remove the details default arrow */
 </style>

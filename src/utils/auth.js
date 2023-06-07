@@ -29,6 +29,7 @@ export function getTokenFromLocalStorage() {
 	return null;
 }
 
+
 export async function isLoggedIn() {
 	if (!getTokenFromLocalStorage()) {
 		return false;
@@ -62,6 +63,7 @@ export async function isLoggedIn() {
 	}
 }
 
+
 export async function authenticateUser(username, password) {
 	const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/api/collections/users/auth-with-password', {
 		method: 'POST',
@@ -84,7 +86,9 @@ export async function authenticateUser(username, password) {
 				token: res.token,
 				userId: res.record.id
 			})
-		);isLoggedInStore.set(true); // Update the store with the logged-in status
+		);
+
+		isLoggedInStore.set(true); // Update the store with the logged-in status
 
 		return {
 			success: true,
