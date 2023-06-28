@@ -36,7 +36,7 @@
 	toggleCheckboxes();
 </script>
 
-<header class=" sticky top-0 z-10 bg-current">
+<header class="sticky top-0 z-10 bg-current">
 	<nav class="sm:px-10 mb-10 navbar flex flex-row justify-between items-center shadow-lg">
 		<!--sm: meaning breakpoint starting from 640px and above-->
 		<a
